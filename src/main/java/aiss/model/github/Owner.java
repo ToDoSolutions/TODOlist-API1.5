@@ -1,6 +1,9 @@
 package aiss.model.github;
 
 import com.fasterxml.jackson.annotation.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
 import javax.annotation.Generated;
 import java.util.HashMap;
