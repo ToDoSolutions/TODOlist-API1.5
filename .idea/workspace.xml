@@ -13,6 +13,25 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -33,17 +52,38 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/alex0/eclipse-workspace/simple-heroku-webapp/src/main/java/com/todolist/controllers",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers"
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers",
+    "spring.configuration.checksum": "5ef4768f8fca2ce907ca3aa3d1186a2d"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\controllers" />
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\filters" />
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\converters" />
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\services" />
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\repositories" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp" />
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\config" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.todolist" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Swagger Codegen.swagger.yaml.yaml">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.heroku.Main" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.Main" />
       <module name="simple-heroku-webapp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.heroku.*" />
+          <option name="PATTERN" value="com.todolist.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -51,11 +91,69 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="SwaggerCodegen">
+      <option name="activeConfigurationType" value="FILE" />
+      <option name="configurationPath" value="" />
+      <option name="customJreEnabled" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="enableDebugLogging" value="false" />
+      <option name="generateToPath" value="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="jdkPath" value="Default" />
+      <option name="language" value="java" />
+      <option name="specificationPath" value="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp\docs\swagger.yaml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="swagger.yaml.yaml" type="SwaggerCodegen">
+      <option name="activeConfigurationType" value="FILE" />
+      <option name="configurationPath" value="" />
+      <option name="customJreEnabled" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="enableDebugLogging" value="false" />
+      <option name="generateToPath" value="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="jdkPath" value="Default" />
+      <option name="language" value="java" />
+      <option name="specificationPath" value="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp\docs\swagger.yaml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="simple-heroku-webapp [clean,install]" type="org.kubicz.mavenexecutor.runconfiguration.MavenExecutorRunConfigurationType" factoryName="MavenExecutor" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Maven.simple-heroku-webapp [clean,install]" />
+      <item itemvalue="Swagger Codegen.swagger.yaml.yaml" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -65,7 +163,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658162031347</updated>
-      <workItem from="1658162032738" duration="339000" />
+      <workItem from="1658162032738" duration="9064000" />
+      <workItem from="1658177199428" duration="4896000" />
     </task>
     <servers />
   </component>
