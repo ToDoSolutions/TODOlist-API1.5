@@ -10,6 +10,7 @@ import com.todolist.repositories.UserTaskRepository;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class GroupService {
@@ -30,7 +31,7 @@ public class GroupService {
     private UserService userService;
 
     public List<ShowGroup> findAllShowGroups(String order) {
-        return groupRepository.findAll(order).stream().map(group -> new ShowGroup(group, getShowUserFromGroup(group))).toList();
+        return groupRepository.findAll(order).stream().map(group -> new ShowGroup(group, getShowUserFromGroup(group))).collect(Collectors.toList());
     }
 
     public Group findGroupById(Long idGroup) {
@@ -48,11 +49,11 @@ public class GroupService {
     public List<User> getUsersFromGroup(Group group) {
         return groupUserRepository.findByIdGroup(group.getIdGroup()).stream()
                 .map(groupUser -> userRepository.findByIdUser(groupUser.getIdUser()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<ShowUser> getShowUserFromGroup(Group group) {
-        return getUsersFromGroup(group).stream().map(user -> new ShowUser(user, userService.getShowTaskFromUser(user))).toList();
+        return getUsersFromGroup(group).stream().map(user -> new ShowUser(user, userService.getShowTaskFromUser(user))).collect(Collectors.toList());
     }
 
     public void addUserToGroup(Group group, User user) {
@@ -91,11 +92,11 @@ public class GroupService {
     }
 
     public List<Group> findGroupsWithUser(User user) {
-        return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).contains(user)).toList();
+        return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).contains(user)).collect(Collectors.toList());
     }
 
     public List<Group> findGroupsWithTask(Task task) {
-        return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).stream().anyMatch(user -> userService.getTasksFromUser(user).contains(task))).toList();
+        return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).stream().anyMatch(user -> userService.getTasksFromUser(user).contains(task))).collect(Collectors.toList());
     }
 
     /*

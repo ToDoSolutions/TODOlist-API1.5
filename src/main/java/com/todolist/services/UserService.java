@@ -42,17 +42,17 @@ public class UserService {
     }
 
     public List<User> findUsersWithTask(Task task) {
-        return userRepository.findAll().stream().filter(user -> getTasksFromUser(user).contains(task)).toList();
+        return userRepository.findAll().stream().filter(user -> getTasksFromUser(user).contains(task)).collect(Collectors.toList());
     }
 
     public List<Task> getTasksFromUser(User user) {
         return userTaskRepository.findByIdUser(user.getIdUser()).stream()
                 .map(userTask -> taskRepository.findByIdTask(userTask.getIdTask()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<ShowTask> getShowTaskFromUser(User user) {
-        return getTasksFromUser(user).stream().map(ShowTask::new).toList();
+        return getTasksFromUser(user).stream().map(ShowTask::new).collect(Collectors.toList());
     }
 
     /*

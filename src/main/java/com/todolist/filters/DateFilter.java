@@ -22,24 +22,24 @@ public class DateFilter {
         if (Pattern.compile("[<>=]\\d{4}-\\d{2}-\\d{2}").matcher(filterWithDate).matches()) {
             String filter = filterWithDate.charAt(0) + "";
             LocalDate localDate = LocalDate.parse(filterWithDate.substring(1), DateTimeFormatter.ISO_DATE);
-            return switch (filter) {
-                case "<" -> new DateFilter(false, true, false, localDate);
-                case ">" -> new DateFilter(true, false, false, localDate);
-                case "=" -> new DateFilter(false, false, true, localDate);
-                default ->
+            switch (filter) {
+                case "<": return new DateFilter(false, true, false, localDate);
+                case ">": return new DateFilter(true, false, false, localDate);
+                case "=": return new DateFilter(false, false, true, localDate);
+                default:
                         throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a date with the format YYYY-MM-DD.");
-            };
+            }
         } else if (Pattern.compile("[<>=]{2}\\d{4}-\\d{2}-\\d{2}").matcher(filterWithDate).matches()) {
             String filter = filterWithDate.charAt(0) + "" + filterWithDate.charAt(1);
             LocalDate localDate = LocalDate.parse(filterWithDate.substring(2), DateTimeFormatter.ISO_DATE);
-            return switch (filter) {
-                case "<=", "=<" -> new DateFilter(false, true, true, localDate);
-                case ">=", "=>" -> new DateFilter(true, false, true, localDate);
-                case "==" -> new DateFilter(false, false, true, localDate);
-                case "!=", "<>", "><" -> new DateFilter(true, true, false, localDate);
-                default ->
+            switch (filter) {
+                case "<=": case "=<": return new DateFilter(false, true, true, localDate);
+                case ">=": case "=>": return new DateFilter(true, false, true, localDate);
+                case "==": return new DateFilter(false, false, true, localDate);
+                case "!=": case "<>": case "><": return new DateFilter(true, true, false, localDate);
+                default:
                         throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a date with the format YYYY-MM-DD.");
-            };
+            }
         } else {
             throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a date with the format YYYY-MM-DD.");
         }

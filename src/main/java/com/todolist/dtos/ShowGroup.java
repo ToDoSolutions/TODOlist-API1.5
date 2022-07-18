@@ -50,8 +50,8 @@ public class ShowGroup {
     }
 
     public Map<String, Object> getFields(String fieldsGroup, String fieldsUser, String fieldsTask) {
-        List<String> attributes = Stream.of(fieldsGroup.split(",")).map(String::trim).toList();
-        List<String> attributesNotNeeded = Stream.of(ALL_ATTRIBUTES.split(",")).map(String::trim).filter(attribute -> !attributes.contains(attribute)).toList();
+        List<String> attributes = Stream.of(fieldsGroup.split(",")).map(String::trim).collect(Collectors.toList());
+        List<String> attributesNotNeeded = Stream.of(ALL_ATTRIBUTES.split(",")).map(String::trim).filter(attribute -> !attributes.contains(attribute)).collect(Collectors.toList());
         ObjectMapper mapper = new ObjectMapper()
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())
@@ -60,7 +60,7 @@ public class ShowGroup {
         Map<String, Object> map = mapper.convertValue(this, Map.class);
         for (String attribute : attributesNotNeeded) map.remove(attribute);
         if (attributes.contains("users"))
-            map.put("users", getUsers().stream().map(task -> task.getFields(fieldsUser, fieldsTask)).toList());
+            map.put("users", getUsers().stream().map(task -> task.getFields(fieldsUser, fieldsTask)).collect(Collectors.toList()));
         return map;
     }
 }

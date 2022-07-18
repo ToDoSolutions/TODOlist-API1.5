@@ -2,7 +2,6 @@ package com.todolist.exceptions;
 
 import com.google.common.base.Splitter;
 import lombok.Getter;
-import org.springframework.web.client.HttpStatusCodeException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ public class ManagerException {
     private String path;
     private String status;
 
-
+    /*
     private ManagerException(HttpStatusCodeException exception) {
         Map<String, String> info;
         try {
@@ -48,6 +47,7 @@ public class ManagerException {
     public static ManagerException of(HttpStatusCodeException exception) {
         return new ManagerException(exception);
     }
+     */
 
     public ManagerException assertStatus(String expected) {
         if (!Objects.equals(status, expected))

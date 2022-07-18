@@ -6,6 +6,7 @@ import com.todolist.repositories.TaskRepository;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class TaskService {
@@ -14,11 +15,11 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     public List<ShowTask> findAllShowTasks(String order) {
-        return taskRepository.findAll(order).stream().map(ShowTask::new).toList();
+        return taskRepository.findAll(order).stream().map(ShowTask::new).collect(Collectors.toList());
     }
 
     public List<Task> findAllTasks() {
-        return taskRepository.findAll().stream().toList();
+        return taskRepository.findAll().stream().collect(Collectors.toList());
     }
 
     public Task findTaskById(Long idTask) {

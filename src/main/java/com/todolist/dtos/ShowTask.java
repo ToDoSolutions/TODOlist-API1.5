@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -53,8 +54,8 @@ public class ShowTask {
     }
 
     public Map<String, Object> getFields(String fields) {
-        List<String> attributes = Stream.of(fields.split(",")).map(String::trim).toList();
-        List<String> attributesNotNeeded = Stream.of(ALL_ATTRIBUTES.split(",")).map(String::trim).filter(attribute -> !attributes.contains(attribute)).toList();
+        List<String> attributes = Stream.of(fields.split(",")).map(String::trim).collect(Collectors.toList());
+        List<String> attributesNotNeeded = Stream.of(ALL_ATTRIBUTES.split(",")).map(String::trim).filter(attribute -> !attributes.contains(attribute)).collect(Collectors.toList());
         ObjectMapper mapper = new ObjectMapper()
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())

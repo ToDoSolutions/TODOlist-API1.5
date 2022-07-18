@@ -12,6 +12,7 @@ import lombok.ToString;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Getter
@@ -50,8 +51,8 @@ public class ShowUser {
     }
 
     public Map<String, Object> getFields(String fieldsUser, String fieldsTask) {
-        List<String> attributes = Stream.of(fieldsUser.split(",")).map(String::trim).toList();
-        List<String> attributesNotNeeded = Stream.of(ALL_ATTRIBUTES.split(",")).map(String::trim).filter(attribute -> !attributes.contains(attribute)).toList();
+        List<String> attributes = Stream.of(fieldsUser.split(",")).map(String::trim).collect(Collectors.toList());
+        List<String> attributesNotNeeded = Stream.of(ALL_ATTRIBUTES.split(",")).map(String::trim).filter(attribute -> !attributes.contains(attribute)).collect(Collectors.toList());
         ObjectMapper mapper = new ObjectMapper()
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new Jdk8Module())
@@ -60,7 +61,7 @@ public class ShowUser {
         Map<String, Object> map = mapper.convertValue(this, Map.class);
         for (String attribute : attributesNotNeeded) map.remove(attribute);
         if (attributes.contains("tasks"))
-            map.put("tasks", getTasks().stream().map(task -> task.getFields(fieldsTask)).toList());
+            map.put("tasks", getTasks().stream().map(task -> task.getFields(fieldsTask)).collect(Collectors.toList()));
         return map;
     }
 }

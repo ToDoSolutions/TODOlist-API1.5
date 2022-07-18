@@ -1,6 +1,11 @@
 package com.todolist.controllers;
 
-/*@Path("myresource")
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+@Path("myresource")
 public class MyResource {
 
     @GET
@@ -9,4 +14,3 @@ public class MyResource {
         return "Hello, Heroku!";
     }
 }
- */
