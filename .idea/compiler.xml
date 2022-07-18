@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jax-rs-heroku" />
+        <module name="simple-heroku-webapp" />
       </profile>
     </annotationProcessing>
   </component>

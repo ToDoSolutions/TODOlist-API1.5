@@ -7,11 +7,11 @@
 }</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Main" />
-      <module name="jax-rs-heroku" />
+      <option name="MAIN_CLASS_NAME" value="com.example.heroku.Main" />
+      <module name="simple-heroku-webapp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.*" />
+          <option name="PATTERN" value="com.example.heroku.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
