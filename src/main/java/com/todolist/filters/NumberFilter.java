@@ -21,22 +21,33 @@ public class NumberFilter {
             String filter = filterWithNumber.charAt(0) + "";
             Long number = Long.parseLong(filterWithNumber.substring(1));
             switch (filter) {
-                case "<": return new NumberFilter(false, true, false, number);
-                case ">": return new NumberFilter(true, false, false, number);
-                case "=": return new NumberFilter(false, false, true, number);
+                case "<":
+                    return new NumberFilter(false, true, false, number);
+                case ">":
+                    return new NumberFilter(true, false, false, number);
+                case "=":
+                    return new NumberFilter(false, false, true, number);
                 default:
-                        throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a number without decimals.");
+                    throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a number without decimals.");
             }
         } else if (Pattern.compile("[<>=]{2}\\d+").matcher(filterWithNumber).matches()) {
             String filter = filterWithNumber.charAt(0) + "" + filterWithNumber.charAt(1);
             Long number = Long.parseLong(filterWithNumber.substring(2));
             switch (filter) {
-                case "<=": case "=<": return new NumberFilter(false, true, true, number);
-                case ">=": case "=>": return new NumberFilter(true, false, true, number);
-                case "==": return new NumberFilter(false, false, true, number);
-                case "!=": case "<>": case "><": return new NumberFilter(true, true, false, number);
+                case "<=":
+                case "=<":
+                    return new NumberFilter(false, true, true, number);
+                case ">=":
+                case "=>":
+                    return new NumberFilter(true, false, true, number);
+                case "==":
+                    return new NumberFilter(false, false, true, number);
+                case "!=":
+                case "<>":
+                case "><":
+                    return new NumberFilter(true, true, false, number);
                 default:
-                        throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a number without decimals.");
+                    throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a number without decimals.");
             }
         } else {
             throw new IllegalArgumentException("The filter is not valid and it should have a parameter filter (<,>,=,<=,=<,>=,=>,==,!=,<>,><) and a number without decimals.");

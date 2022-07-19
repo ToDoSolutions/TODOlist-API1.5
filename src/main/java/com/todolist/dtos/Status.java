@@ -10,13 +10,20 @@ public enum Status {
     public static Status parse(String status) {
         String statusLowerCase = status.toLowerCase();
         switch (statusLowerCase) {
-            case "draft": return DRAFT;
-            case "in_progress": case "in progress": return IN_PROGRESS;
-            case "in_revision": case "in revision": return IN_REVISION;
-            case "done": return DONE;
-            case "cancelled": return CANCELLED;
+            case "draft":
+                return DRAFT;
+            case "in_progress":
+            case "in progress":
+                return IN_PROGRESS;
+            case "in_revision":
+            case "in revision":
+                return IN_REVISION;
+            case "done":
+                return DONE;
+            case "cancelled":
+                return CANCELLED;
             default:
-                    throw new IllegalArgumentException("The status " + status + " is not valid and it should be one of the following -> draft - in_progress - in_revision - done - cancelled.");
+                throw new IllegalArgumentException("The status " + status + " is not valid and it should be one of the following -> draft - in_progress - in_revision - done - cancelled.");
         }
     }
 }

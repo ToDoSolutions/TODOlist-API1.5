@@ -2,24 +2,34 @@ package com.todolist.services;
 
 import com.todolist.dtos.ShowTask;
 import com.todolist.entity.Task;
+import com.todolist.repositories.Sort;
 import com.todolist.repositories.TaskRepository;
-import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 public class TaskService {
 
 
-    private TaskRepository taskRepository;
+    private static TaskService instance = null;
+    private final TaskRepository taskRepository;
+
+    private TaskService() {
+        taskRepository = TaskRepository.getInstance();
+    }
+
+    public static TaskService getInstance() {
+        instance = (instance == null) ? new TaskService() : instance;
+        return instance;
+    }
 
     public List<ShowTask> findAllShowTasks(String order) {
-        return taskRepository.findAll(order).stream().map(ShowTask::new).collect(Collectors.toList());
+        return taskRepository.findAll(order.replace("+", "").replace("-", ""), Sort.parse(order)).stream().map(ShowTask::new).collect(Collectors.toList());
     }
 
     public List<Task> findAllTasks() {
-        return taskRepository.findAll().stream().collect(Collectors.toList());
+        return new ArrayList<>(taskRepository.findAll());
     }
 
     public Task findTaskById(Long idTask) {

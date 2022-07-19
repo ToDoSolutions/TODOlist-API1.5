@@ -1,27 +1,63 @@
 package com.todolist.repositories;
 
 import com.todolist.entity.Group;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.NotFoundException;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class GroupRepository {
-    public List<Group> findAll() {
-        return null;
+
+    private static GroupRepository instance = null;
+    private final GroupUserRepository groupUserRepository;
+    private final TreeSet<Group> groups;
+
+    private Long generatedId = 0L;
+
+    public GroupRepository() {
+        groups = new TreeSet<>();
+        generateData();
+        groupUserRepository = GroupUserRepository.getInstance();
     }
 
-    public List<Group> findAll(String order) {
-        return null;
+    public static GroupRepository getInstance() {
+        instance = (instance == null) ? new GroupRepository() : instance;
+        return instance;
+    }
+
+    private void generateData() {
+        save(Group.of("Pepe", "Solo quieren ver el mundo arder", "2006-10-12"));
+        save(Group.of("Otakus", "Dicen que su factura del agua es negativa", "2022-05-06"));
+        save(Group.of("AISS enjoyers", "Se dice que son seres que existen desde el inicio de los multiversos", "2000-03-09"));
+    }
+
+    public List<Group> findAll() {
+        return new ArrayList<>(groups);
+    }
+
+    public List<Group> findAll(String order, Sort sort) throws NoSuchMethodException {
+        String nameMethod = "get" + order.substring(0, 1).toUpperCase() + order.substring(1);
+        Method method = Group.class.getMethod(nameMethod);
+        return sort.sort(groups, method);
     }
 
 
     public Group findByIdGroup(Long idGroup) {
-        return null;
+        return groups.stream().filter(x -> x.getIdGroup().equals(idGroup)).findFirst().orElseThrow(() -> new NotFoundException("Group not found"));
     }
 
     public Group save(Group group) {
-        return null;
+        group.setIdGroup(generatedId++);
+        if (groups.add(group)) return group;
+        else throw new BadRequestException("Group already exists");
     }
 
-    public void delete(Group group) {
+    public Group delete(Group group) {
+        if (!groups.remove(group)) throw new BadRequestException("Group not found");
+        groupUserRepository.deleteAll(groupUserRepository.findByIdGroup(group.getIdGroup()));
+        return group;
     }
 }

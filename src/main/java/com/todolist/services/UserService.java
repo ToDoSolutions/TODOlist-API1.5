@@ -5,28 +5,41 @@ import com.todolist.dtos.ShowUser;
 import com.todolist.entity.Task;
 import com.todolist.entity.User;
 import com.todolist.entity.UserTask;
+import com.todolist.repositories.Sort;
 import com.todolist.repositories.TaskRepository;
 import com.todolist.repositories.UserRepository;
 import com.todolist.repositories.UserTaskRepository;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 public class UserService {
 
-    private UserRepository userRepository;
+    private static UserService instance = null;
+
+    private final UserRepository userRepository;
 
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
 
-    private UserTaskRepository userTaskRepository;
+    private final UserTaskRepository userTaskRepository;
+
+    public UserService() {
+        userRepository = UserRepository.getInstance();
+        taskRepository = TaskRepository.getInstance();
+        userTaskRepository = UserTaskRepository.getInstance();
+    }
+
+    public static UserService getInstance() {
+        instance = (instance == null) ? new UserService() : instance;
+        return instance;
+    }
 
 
-    public List<ShowUser> findAllShowUsers(String order) {
-        return userRepository.findAll(order).stream().map(user -> new ShowUser(user, getShowTaskFromUser(user))).collect(Collectors.toList());
+    public List<ShowUser> findAllShowUsers(String order) throws NoSuchMethodException {
+        return userRepository.findAll(order.replace("+", "").replace("-", ""), Sort.parse(order)).stream().map(user -> new ShowUser(user, getShowTaskFromUser(user))).collect(Collectors.toList());
     }
 
     public User findUserById(Long idUser) {
@@ -70,7 +83,7 @@ public class UserService {
      */
 
     public void addTaskToUser(User user, Task task) {
-        userTaskRepository.save(new UserTask(user.getIdUser(), task.getIdTask()));
+        userTaskRepository.save(UserTask.of(user.getIdUser(), task.getIdTask()));
     }
 
     public void removeTaskFromUser(User user, Task task) {

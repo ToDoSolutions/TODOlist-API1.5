@@ -23,7 +23,6 @@ public class ShowUser {
     private Long idUser;
     private String name;
     private String surname;
-    private String username;
     private String email;
     private String avatar;
     private String bio;
@@ -42,7 +41,6 @@ public class ShowUser {
         this.avatar = user.getAvatar();
         this.bio = user.getBio();
         this.location = user.getLocation();
-        this.username = user.getUsername();
         this.tasks = tasks;
     }
 

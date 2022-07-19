@@ -1,160 +1,165 @@
 package com.todolist.controllers;
 
-/*
-import aiss.model.*;
-import aiss.model.repository.MapRepository;
-import aiss.model.repository.Repository;
-import aiss.utilities.Filter;
-import aiss.utilities.Order;
-import aiss.utilities.Update;
-import aiss.utilities.messages.Checker;
-import aiss.utilities.messages.ControllerResponse;
-import aiss.utilities.messages.NotFound;
-import aiss.utilities.messages.Required;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
+import com.todolist.dtos.Difficulty;
+import com.todolist.dtos.ShowTask;
+import com.todolist.dtos.Status;
+import com.todolist.entity.Task;
+import com.todolist.filters.DateFilter;
+import com.todolist.filters.NumberFilter;
+import com.todolist.services.TaskService;
+import jakarta.validation.*;
+import jakarta.validation.executable.ValidateOnExecution;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
+
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Path("/tasks")
-@Produces("application/json")
 public class TaskResource {
 
-    protected static TaskResource instance = null; // La instancia inicialmente no existe, se crea al ejecutar .getInstance().
-    final Repository repository; // Para poder trabajar con los datos
+    protected static TaskResource instance = null;
+    final TaskService taskService; // Para poder trabajar con los datos
+    // private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator(); // Arreglar algún día.
 
-    private TaskResource() {
-        repository = MapRepository.getInstance();
-    }
-
-    public static TaskResource getInstance() {
-        instance = (instance == null) ? new TaskResource() : instance; // Creamos una instancia si no existe.
-        return instance;
+    public TaskResource() {
+        System.out.println("TaskResource");
+        taskService = TaskService.getInstance();
+        System.out.println("TaskResource taskService: " + taskService);
     }
 
     @GET
-    public Response getAllTasks(@QueryParam("order") String order,
-                                @QueryParam("limit") String limit, @QueryParam("offset") String offset,
-                                @QueryParam("fields") String fields, @QueryParam("title") String title,
-                                @QueryParam("status") String status, @QueryParam("startDate") String startDate,
-                                @QueryParam("finishedDate") String finishedDate, @QueryParam("priority") String priority,
-                                @QueryParam("difficulty") String difficulty, @QueryParam("duration") String duration) {
-        List<Task> result = new ArrayList<>(), tasks = new ArrayList<>(repository.getAllTask()); // No se puede utilizar .toList() porque eso es a partir de Java 16.
-        ControllerResponse controller = ControllerResponse.create();
-        Integer auxLimit = Checker.isNumberCorrect(limit, controller);
-        Integer auxOffset = Checker.isNumberCorrect(offset, controller);
-        Status auxStatus = Checker.isStatusCorrect(status, controller);
-        Difficulty auxDifficulty = Checker.isDifficultyCorrect(difficulty, controller);
-        Checker.isParamGELDate(startDate, controller); // Comprobamos formato de fecha de inicio.
-        Checker.isParamGELDate(finishedDate, controller); // Comprobamos formato de fecha de fin.
-        Checker.isParamGELNumber(priority, controller);
-        Checker.isParamGELNumber(duration, controller);
-        if (Boolean.TRUE.equals(controller.hasError())) return controller.getMessage();
-        if (order != null)
-            Order.sequenceTask(result, order);
-        int start = offset == null || auxOffset < 1 ? 0 : auxOffset - 1; // Donde va a comenzar.
-        int end = limit == null || auxLimit > tasks.size() ? tasks.size() : start + auxLimit; // Donde va a terminar.
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllTasks(@QueryParam("order") @DefaultValue("+idTask") String order,
+                                @QueryParam("limit") @DefaultValue("-1") Integer limit,
+                                @QueryParam("offset") Integer offset,
+                                @QueryParam("fields") @DefaultValue(ShowTask.ALL_ATTRIBUTES) String fields,
+                                @QueryParam("title") String title,
+                                @QueryParam("status") @DefaultValue("null") Status status,
+                                @QueryParam("startDate") @DefaultValue("null") DateFilter startDate,
+                                @QueryParam("finishedDate") @DefaultValue("null") DateFilter finishedDate,
+                                @QueryParam("priority") @DefaultValue("null") NumberFilter priority,
+                                @QueryParam("difficulty") @DefaultValue("null") Difficulty difficulty,
+                                @QueryParam("duration") @DefaultValue("null") NumberFilter duration) {
+        List<ShowTask> result = new ArrayList<>();
+        String propertyOrder = order.charAt(0) == '+' || order.charAt(0) == '-' ? order.substring(1) : order;
+        System.out.println("4");
+        if (!(Arrays.stream(ShowTask.ALL_ATTRIBUTES.split(",")).anyMatch(prop -> prop.equalsIgnoreCase(propertyOrder))))
+            throw new BadRequestException("The order is invalid.");
+        System.out.println("3");
+        if (!(Arrays.stream(fields.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The fields are invalid.");
+        System.out.println("2");
+        List<ShowTask> tasks = new ArrayList<>(taskService.findAllShowTasks(order));
+        System.out.println("1");
+        if (limit == -1) limit = tasks.size() - 1;
+        int start = offset == null || offset < 1 ? 0 : offset - 1; // Donde va a comenzar.
+        int end = limit == null || limit > tasks.size() ? tasks.size() : start + limit; // Donde va a terminar.
         for (int i = start; i < end; i++) {
-            Task task = tasks.get(i);
+            ShowTask task = tasks.get(i);
             if (task != null &&
                     (title == null || task.getTitle().contains(title)) &&
-                    (auxStatus == null || task.getStatus() == auxStatus) &&
-                    (startDate == null || Filter.isGEL(task.getStartDate(), startDate)) &&
-                    (finishedDate == null || Filter.isGEL(task.getFinishedDate(), finishedDate)) &&
-                    (priority == null || Filter.isGEL((long) task.getPriority(), priority)) &&
-                    (auxDifficulty == null || task.getDifficulty() == auxDifficulty) &&
-                    (duration == null || Filter.isGEL(task.getDuration(), duration)))
+                    (status == null || task.getStatus().equals(status)) &&
+                    (startDate == null || startDate.isValid(task.getStartDate())) &&
+                    (finishedDate == null || finishedDate.isValid(task.getStartDate())) &&
+                    (priority == null || priority.isValid(task.getPriority())) &&
+                    (difficulty == null || task.getDifficulty().equals(difficulty)) &&
+                    (duration == null || duration.isValid(task.getDuration())))
                 result.add(task);
         }
 
-        return Response.ok(result.stream().map(task -> task.getFields(fields == null ? Task.ALL_ATTRIBUTES : fields)).collect(Collectors.toList())).build();
-
+        return Response.ok(result.stream().map(task -> task.getFields(fields == null ? ShowTask.ALL_ATTRIBUTES : fields)).collect(Collectors.toList())).build();
     }
 
 
     @GET
     @Path("/{taskId}")
-    public Response getTask(@PathParam("taskId") String taskId, @QueryParam("fields") String fields) {
-        Task task = repository.getTask(taskId);
-        ControllerResponse controller = ControllerResponse.create();
-
-        NotFound.isTaskFound(task, taskId, controller); // Comprobamos si se encuentra el objeto en la base de datos chapucera.
-        if (Boolean.TRUE.equals(controller.hasError())) return controller.getMessage();
-
-        return Response.ok(task.getFields(fields == null ? Task.ALL_ATTRIBUTES : fields)).build();
+    public Response getTask(@PathParam("taskId") Long taskId,
+                            @QueryParam("fields") @DefaultValue(ShowTask.ALL_ATTRIBUTES) String fields) {
+        Task task = taskService.findTaskById(taskId);
+        if (task == null)
+            throw new NotFoundException("Task not found."); // Comprobamos si se encuentra el objeto en la base de datos chapucera.
+        return Response.ok(new ShowTask(task).getFields(fields == null ? ShowTask.ALL_ATTRIBUTES : fields)).build();
     }
 
     @POST
     @Consumes("application/json")
-    public Response addTask(@Context UriInfo uriInfo, Task task) {
-        ControllerResponse controller = ControllerResponse.create();
+    public Response addTask(@Context UriInfo uriInfo, @Valid Task task) {
 
-        Required.forTask(task, controller); // Comprobamos aquellos campos obligatorios.
-        Checker.isTaskCorrect(task, controller); // Comprobamos si los campos son correctos.
-        if (Boolean.TRUE.equals(controller.hasError())) return controller.getMessage();
-
-        repository.addTask(task); // Añadimos la tarea a la base de datos.
-
+        if (task == null) throw new BadRequestException("Task is null.");
+        if (task.getTitle() == null || task.getTitle().isEmpty())
+            throw new BadRequestException("Task title is null or empty.");
+        if (task.getDescription() == null || task.getDescription().isEmpty())
+            throw new BadRequestException("Task description is null or empty.");
+        if (task.getFinishedDate() == null || task.getFinishedDate().isEmpty())
+            throw new BadRequestException("Task start date is null.");
+        if (task.getStartDate() == null) task.setStartDate(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
+        ShowTask showTask = new ShowTask(task); // Creamos un objeto ShowTask para poder mostrar la tarea.
+        if (!showTask.getStartDate().isBefore(showTask.getFinishedDate()))
+            throw new BadRequestException("Task start date is after task finished date.");
+        if (showTask.getFinishedDate().isBefore(LocalDate.now()))
+            throw new BadRequestException("Task finished date is before today.");
+        task = taskService.saveTask(task); // Añadimos la tarea a la base de datos.
+        showTask = new ShowTask(task);
         // Builds the response. Returns the task the has just been added.
         UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "getTask");
-        URI uri = ub.build(task.getIdTask());
-        ResponseBuilder resp = Response.created(uri);
-        resp.entity(task);
+        URI uri = ub.build(showTask.getIdTask());
+        Response.ResponseBuilder resp = Response.created(uri);
+        resp.entity(showTask);
         return resp.build();
     }
 
     @PUT
     @Consumes("application/json")
-    public Response updateTask(Task task) {
-        ControllerResponse controller = ControllerResponse.create();
-
-        Required.haveTaskId(task, controller); // Comprobamos que nos ha dado una id.
-        if (Boolean.TRUE.equals(controller.hasError())) return controller.getMessage();
-
-        Task oldTask = repository.getTask(task.getIdTask());
-
-        NotFound.isTaskFound(oldTask, task.getIdTask(), controller); // Comprobamos si se encuentra el objeto en la base de datos.
-        Checker.isTaskCorrect(task, controller); // Comprobamos si los campos son correctos.
-        if (Boolean.TRUE.equals(controller.hasError())) return controller.getMessage();
-
-        Update.taskFromOther(task, oldTask); // Actualiza los atributos del modelo.
-
-        repository.updateTask(oldTask);  // No está en la práctica 7, pero deduzco que falta, ya que de la otra manera no se actualiza en la base de datos.
-
+    public Response updateTask(@Valid Task task) {
+        Task oldTask = taskService.findTaskById(task.getIdTask());
+        if (oldTask == null)
+            throw new NullPointerException("The task with idTask " + task.getIdTask() + " does not exist.");
+        if (task.getTitle() != null && !Objects.equals(task.getTitle(), ""))
+            oldTask.setTitle(task.getTitle());
+        if (task.getDescription() != null && !Objects.equals(task.getDescription(), ""))
+            oldTask.setDescription(task.getDescription());
+        if (task.getStatus() != null && !Objects.equals(task.getStatus(), ""))
+            oldTask.setStatus(task.getStatus());
+        if (task.getFinishedDate() != null && !Objects.equals(task.getFinishedDate(), ""))
+            oldTask.setFinishedDate(task.getFinishedDate());
+        if (task.getStartDate() != null && !Objects.equals(task.getStartDate(), ""))
+            oldTask.setStartDate(task.getStartDate());
+        if (task.getAnnotation() != null && !Objects.equals(task.getAnnotation(), ""))
+            oldTask.setAnnotation(task.getAnnotation());
+        if (task.getPriority() != null && !Objects.equals(task.getPriority(), null))
+            oldTask.setPriority(task.getPriority());
+        if (task.getDifficulty() != null && !Objects.equals(task.getDifficulty(), ""))
+            oldTask.setDifficulty(task.getDifficulty());
+        // Set<ConstraintViolation<Task>> errors = validator.validate(oldTask);
+        //if (!errors.isEmpty())
+        //    throw new ConstraintViolationException(errors);
+        ShowTask showTask = new ShowTask(oldTask);
+        if (!showTask.getStartDate().isBefore(showTask.getFinishedDate()))
+            throw new BadRequestException("Task start date is after task finished date.");
+        if (showTask.getFinishedDate().isBefore(LocalDate.now()))
+            throw new BadRequestException("Task finished date is before today.");
+        taskService.saveTask(oldTask);
         return Response.noContent().build();
     }
-
 
     @DELETE
     @Path("/{taskId}")
-    public Response deleteTask(@PathParam("taskId") String taskId) {
-        Task toBeRemoved = repository.getTask(taskId); // Obtiene la tarea a eliminar de la base de datos.
-        ControllerResponse controller = ControllerResponse.create();
+    public Response deleteTask(@PathParam("taskId") Long taskId) {
+        Task task = taskService.findTaskById(taskId);
 
-        NotFound.isTaskFound(toBeRemoved, taskId, controller); // Comprobamos si se encuentra el objeto en la base de datos.
-        if (Boolean.TRUE.equals(controller.hasError())) return controller.getMessage();
+        if (task == null)
+            throw new NotFoundException("Task not found."); // Comprobamos si se encuentra el objeto en la base de datos chapucera.
 
-        repository.deleteTask(taskId); // Elimina la tarea de la base de datos.
-
-        // Elimina la tarea de los usuarios.
-        for (User user : repository.getAllUser())
-            user.deleteTask(toBeRemoved);
-
-        // Elimina la tarea de los grupos.
-        for (Group group : repository.getAllGroup())
-            group.deleteTask(toBeRemoved);
-
+        taskService.deleteTask(task); // Eliminamos la tarea de la base de datos.
         return Response.noContent().build();
     }
 }
- */
 
 
 

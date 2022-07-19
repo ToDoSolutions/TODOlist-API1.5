@@ -1,6 +1,7 @@
 package com.todolist.entity;
 
 
+import com.google.common.base.Objects;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -9,9 +10,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Group {
+public class Group implements Comparable<Group> {
 
-    private Long generateId = 0L;
+
     private Long idGroup;
     @Size(max = 50, message = "The name is too long.")
     private String name;
@@ -21,7 +22,7 @@ public class Group {
     private String createdDate;
 
     public Group() {
-        this.idGroup = generateId++;
+
     }
 
     public static Group of(String name, String description, String createdDate) {
@@ -30,5 +31,24 @@ public class Group {
         group.setDescription(description);
         group.setCreatedDate(createdDate);
         return group;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return Objects.equal(idGroup, group.idGroup);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idGroup);
+    }
+
+
+    @Override
+    public int compareTo(Group o) {
+        return this.getIdGroup().compareTo(o.getIdGroup());
     }
 }

@@ -1,17 +1,18 @@
 package com.todolist.entity;
 
+import com.google.common.base.Objects;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class Task {
-
-    private Long generateId = 0L;
+@ToString
+public class Task implements Comparable<Task> {
     private Long idTask;
     private String title;
     @Size(max = 200, message = "The description is too long.")
@@ -31,7 +32,6 @@ public class Task {
     private String difficulty;
 
     public Task() {
-        this.idTask = generateId++;
     }
 
     public static Task of(String title, String description, String annotation, String status, String finishedDate, String startDate, Long priority, String difficulty) {
@@ -45,5 +45,24 @@ public class Task {
         task.setPriority(priority);
         task.setDifficulty(difficulty);
         return task;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equal(idTask, task.idTask);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idTask);
+    }
+
+
+    @Override
+    public int compareTo(Task o) {
+        return this.getIdTask().compareTo(o.getIdTask());
     }
 }

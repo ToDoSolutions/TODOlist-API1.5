@@ -3,35 +3,37 @@ package com.todolist.services;
 import com.todolist.dtos.ShowGroup;
 import com.todolist.dtos.ShowUser;
 import com.todolist.entity.*;
-import com.todolist.repositories.GroupRepository;
-import com.todolist.repositories.GroupUserRepository;
-import com.todolist.repositories.UserRepository;
-import com.todolist.repositories.UserTaskRepository;
-import lombok.AllArgsConstructor;
+import com.todolist.repositories.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 public class GroupService {
 
 
-    private GroupRepository groupRepository;
+    private static GroupService instance = null;
+    private final GroupRepository groupRepository;
+    private final UserRepository userRepository;
 
-
-    private UserRepository userRepository;
-
-
-    private UserTaskRepository userTaskRepository;
-
-
-    private GroupUserRepository groupUserRepository;
-
-
+    private final UserTaskRepository userTaskRepository;
+    private final GroupUserRepository groupUserRepository;
     private UserService userService;
 
-    public List<ShowGroup> findAllShowGroups(String order) {
-        return groupRepository.findAll(order).stream().map(group -> new ShowGroup(group, getShowUserFromGroup(group))).collect(Collectors.toList());
+    private GroupService() {
+        groupRepository = GroupRepository.getInstance();
+        userRepository = UserRepository.getInstance();
+        userTaskRepository = UserTaskRepository.getInstance();
+        groupUserRepository = GroupUserRepository.getInstance();
+    }
+
+    public static GroupService getInstance() {
+        instance = (instance == null) ? new GroupService() : instance;
+        return instance;
+    }
+
+    public List<ShowGroup> findAllShowGroups(String order) throws NoSuchMethodException {
+        return groupRepository.findAll(order.replace("+", "").replace("-", ""), Sort.parse(order)).stream().map(group -> new ShowGroup(group, getShowUserFromGroup(group))).collect(Collectors.toList());
     }
 
     public Group findGroupById(Long idGroup) {
@@ -57,10 +59,7 @@ public class GroupService {
     }
 
     public void addUserToGroup(Group group, User user) {
-        List<GroupUser> groupUsers = groupUserRepository.findByIdGroupAndIdUser(group.getIdGroup(), user.getIdUser());
-        if (groupUsers.isEmpty())
-            throw new NullPointerException("The user with idUser " + user.getIdUser() + " does not belong to the group with idGroup " + group.getIdGroup() + ".|method: addUserToGroup");
-        groupUserRepository.deleteAll(groupUsers);
+        groupUserRepository.save(GroupUser.of(group.getIdGroup(), user.getIdUser()));
     }
 
     public void removeUserFromGroup(Group group, User user) {
