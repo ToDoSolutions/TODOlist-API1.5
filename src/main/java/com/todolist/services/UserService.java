@@ -50,6 +50,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void updateUser(User user) {
+        userRepository.update(user);
+    }
+
     public void deleteUser(User user) {
         userRepository.delete(user);
     }

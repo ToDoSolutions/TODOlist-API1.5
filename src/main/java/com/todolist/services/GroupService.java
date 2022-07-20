@@ -44,6 +44,10 @@ public class GroupService {
         return groupRepository.save(group);
     }
 
+    public void updateGroup(Group group) {
+        groupRepository.update(group);
+    }
+
     public void deleteGroup(Group group) {
         groupRepository.delete(group);
     }

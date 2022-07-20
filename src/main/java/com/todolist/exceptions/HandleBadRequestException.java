@@ -5,18 +5,23 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
-import java.time.ZoneId;
+import java.net.URI;
+import java.time.LocalDate;
 
 @Provider
 public class HandleBadRequestException implements ExceptionMapper<BadRequestException> {
     @Override
     public Response toResponse(BadRequestException exception) {
         System.out.println("HandleBadRequestException");
-        return Response.status(Response.Status.NOT_FOUND)
+        String url = " --- ";
+        URI location = exception.getResponse().getLocation();
+        if (location != null)
+            url = location.getPath();
+        return Response.status(Response.Status.BAD_REQUEST)
                 .entity(new ExceptionResponse(
-                        exception.getResponse().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        LocalDate.now().toString(),
                         exception.getMessage(),
-                        exception.getResponse().getLocation().getPath(),
+                        url,
                         "Bad Request"))
                 .build();
     }

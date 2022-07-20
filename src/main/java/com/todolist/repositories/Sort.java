@@ -28,8 +28,6 @@ public enum Sort {
 
     public <T> List<T> sort(Collection<T> list, Method method) {
         return list.stream().sorted((x, y) -> {
-                    System.out.println(method.getReturnType());
-                    System.out.println(method.getReturnType().isInstance(Long.class));
                     try {
                         if (method.getReturnType().isInstance(int.class) || method.getReturnType().equals(Long.class))
 

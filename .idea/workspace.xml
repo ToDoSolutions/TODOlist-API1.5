@@ -77,12 +77,12 @@
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\config" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.todolist.controllers" />
       <recent name="com.todolist" />
     </key>
   </component>
-  <component name="RunManager" selected="Swagger Codegen.swagger.yaml.yaml">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.todolist.Main" />
+  <component name="RunManager" selected="JUnit.TaskResourceTest">
+    <configuration name="TaskResourceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="simple-heroku-webapp" />
       <extension name="coverage">
         <pattern>
@@ -90,12 +90,76 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.TaskResourceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
-      <method v="2" />
+    <configuration name="TaskResourceTest.testGetAllWithQueryParamFine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-heroku-webapp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.todolist.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.TaskResourceTest" />
+      <option name="METHOD_NAME" value="testGetAllWithQueryParamFine" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskResourceTest.testPostFine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-heroku-webapp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.todolist.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.TaskResourceTest" />
+      <option name="METHOD_NAME" value="testPostFine" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskResourceTest.testPutWithOutID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-heroku-webapp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.todolist.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.TaskResourceTest" />
+      <option name="METHOD_NAME" value="testPutWithOutID" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskResourceTest.testPutWithWrongDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-heroku-webapp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.todolist.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.TaskResourceTest" />
+      <option name="METHOD_NAME" value="testPutWithWrongDate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="SwaggerCodegen">
       <option name="activeConfigurationType" value="FILE" />
@@ -156,14 +220,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="HTTP Request.generated-requests | #1" />
+      <item itemvalue="JUnit.TaskResourceTest" />
+      <item itemvalue="JUnit.TaskResourceTest.testGetAllWithQueryParamFine" />
+      <item itemvalue="JUnit.TaskResourceTest.testPostFine" />
+      <item itemvalue="JUnit.TaskResourceTest.testPutWithOutID" />
+      <item itemvalue="JUnit.TaskResourceTest.testPutWithWrongDate" />
       <item itemvalue="Maven.simple-heroku-webapp [clean,install]" />
       <item itemvalue="Swagger Codegen.swagger.yaml.yaml" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.generated-requests | #1" />
+        <item itemvalue="JUnit.TaskResourceTest" />
+        <item itemvalue="JUnit.TaskResourceTest.testGetAllWithQueryParamFine" />
+        <item itemvalue="JUnit.TaskResourceTest.testPostFine" />
+        <item itemvalue="JUnit.TaskResourceTest.testPutWithWrongDate" />
+        <item itemvalue="JUnit.TaskResourceTest.testPutWithOutID" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +250,10 @@
       <workItem from="1658177199428" duration="6758000" />
       <workItem from="1658221409462" duration="2207000" />
       <workItem from="1658223678529" duration="8488000" />
-      <workItem from="1658244717511" duration="11237000" />
+      <workItem from="1658244717511" duration="14681000" />
+      <workItem from="1658306100524" duration="542000" />
+      <workItem from="1658306763472" duration="4483000" />
+      <workItem from="1658311450209" duration="6485000" />
     </task>
     <servers />
   </component>

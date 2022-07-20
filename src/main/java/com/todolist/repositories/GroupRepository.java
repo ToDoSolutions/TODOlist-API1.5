@@ -1,19 +1,20 @@
 package com.todolist.repositories;
 
 import com.todolist.entity.Group;
+import com.todolist.entity.Task;
 import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.NotFoundException;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class GroupRepository {
 
     private static GroupRepository instance = null;
     private final GroupUserRepository groupUserRepository;
-    private final TreeSet<Group> groups;
+    private TreeSet<Group> groups;
 
     private Long generatedId = 0L;
 
@@ -46,13 +47,21 @@ public class GroupRepository {
 
 
     public Group findByIdGroup(Long idGroup) {
-        return groups.stream().filter(x -> x.getIdGroup().equals(idGroup)).findFirst().orElseThrow(() -> new NotFoundException("Group not found"));
+        return groups.stream().filter(x -> x.getIdGroup().equals(idGroup)).findFirst().orElse(null);
     }
 
     public Group save(Group group) {
         group.setIdGroup(generatedId++);
         if (groups.add(group)) return group;
         else throw new BadRequestException("Group already exists");
+    }
+
+    public Group update(Group newGroup) {
+        groups = groups.stream().map(group -> {
+            if (newGroup.getIdGroup().equals(group.getIdGroup())) return newGroup;
+            else return group;
+        }).collect(Collectors.toCollection(TreeSet::new));
+        return newGroup;
     }
 
     public Group delete(Group group) {

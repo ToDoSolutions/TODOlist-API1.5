@@ -1,13 +1,15 @@
 package com.todolist.repositories;
 
+import com.todolist.entity.Task;
 import com.todolist.entity.User;
 import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.NotFoundException;
+import lombok.EqualsAndHashCode;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 
 public class UserRepository {
@@ -17,7 +19,7 @@ public class UserRepository {
     private final GroupUserRepository groupUserRepository;
     private final UserTaskRepository userTaskRepository;
 
-    private final TreeSet<User> users;
+    private TreeSet<User> users;
 
 
     private Long generatedId = 0L;
@@ -54,7 +56,7 @@ public class UserRepository {
     }
 
     public User findByIdUser(Long idUser) {
-        return users.stream().filter(x -> x.getIdUser().equals(idUser)).findFirst().orElseThrow(() -> new NotFoundException("User not found"));
+        return users.stream().filter(x -> x.getIdUser().equals(idUser)).findFirst().orElse(null);
     }
 
 
@@ -62,6 +64,14 @@ public class UserRepository {
         user.setIdUser(generatedId++);
         if (users.add(user)) return user;
         else throw new BadRequestException("User already exists");
+    }
+
+    public User update(User newUser) {
+        users = users.stream().map(user -> {
+            if (newUser.getIdUser().equals(user.getIdUser())) return newUser;
+            else return user;
+        }).collect(Collectors.toCollection(TreeSet::new));
+        return newUser;
     }
 
     public User delete(User user) {

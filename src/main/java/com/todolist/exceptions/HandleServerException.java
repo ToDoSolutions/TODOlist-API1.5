@@ -14,9 +14,9 @@ public class HandleServerException implements ExceptionMapper<ServerException> {
         System.out.println("HandleServerException");
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                 .entity(new ExceptionResponse(
-                        LocalDate.now(),
+                        LocalDate.now().toString(),
                         "Internal Server Error",
-                        " - - - ",
+                        " --- ",
                         "Server Error"))
                 .build();
     }

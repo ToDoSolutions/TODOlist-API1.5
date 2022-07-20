@@ -19,7 +19,6 @@ public class StatusConverter implements ParamConverterProvider {
                 @Override
                 public T fromString(String value) {
                     if (Objects.equals(value, "null")) return null;
-                    System.out.println("fromString: " + value);
                     return rawType.cast(Status.parse(value));
                 }
 

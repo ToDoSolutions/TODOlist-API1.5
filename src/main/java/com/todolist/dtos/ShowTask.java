@@ -1,6 +1,7 @@
 package com.todolist.dtos;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -49,6 +50,7 @@ public class ShowTask {
         this.difficulty = task.getDifficulty() != null ? Difficulty.parse(task.getDifficulty()) : null;
     }
 
+    @JsonIgnore
     public long getDuration() {
         return DAYS.between(startDate, finishedDate);
     }

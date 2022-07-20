@@ -23,7 +23,7 @@ public enum Status {
             case "cancelled":
                 return CANCELLED;
             default:
-                throw new IllegalArgumentException("The status " + status + " is not valid and it should be one of the following -> draft - in_progress - in_revision - done - cancelled.");
+                return null;
         }
     }
 }
