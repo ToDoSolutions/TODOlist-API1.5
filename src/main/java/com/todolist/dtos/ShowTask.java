@@ -35,9 +35,6 @@ public class ShowTask {
     private Long priority;
     private Difficulty difficulty;
 
-    public ShowTask() {
-    }
-
     public ShowTask(Task task) {
         this.idTask = task.getIdTask();
         this.title = task.getTitle();

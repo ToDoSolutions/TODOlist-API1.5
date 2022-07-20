@@ -20,6 +20,9 @@
       </list>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1-sources.jar!/org/junit/Before.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
@@ -52,20 +55,20 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/alex0/eclipse-workspace/simple-heroku-webapp/src/main/webapp/docs&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alex0/eclipse-workspace/simple-heroku-webapp/src/main/java/com/todolist/controllers&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;5ef4768f8fca2ce907ca3aa3d1186a2d&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\controllers" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp\docs" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp" />
-      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\controllers" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\filters" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\converters" />
     </key>
@@ -253,7 +256,9 @@
       <workItem from="1658244717511" duration="14681000" />
       <workItem from="1658306100524" duration="542000" />
       <workItem from="1658306763472" duration="4483000" />
-      <workItem from="1658311450209" duration="6485000" />
+      <workItem from="1658311450209" duration="9949000" />
+      <workItem from="1658330629807" duration="422000" />
+      <workItem from="1658331256313" duration="3967000" />
     </task>
     <servers />
   </component>

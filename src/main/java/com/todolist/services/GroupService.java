@@ -32,7 +32,7 @@ public class GroupService {
         return instance;
     }
 
-    public List<ShowGroup> findAllShowGroups(String order) throws NoSuchMethodException {
+    public List<ShowGroup> findAllShowGroups(String order) {
         return groupRepository.findAll(order.replace("+", "").replace("-", ""), Sort.parse(order)).stream().map(group -> new ShowGroup(group, getShowUserFromGroup(group))).collect(Collectors.toList());
     }
 
@@ -44,8 +44,13 @@ public class GroupService {
         return groupRepository.save(group);
     }
 
-    public void updateGroup(Group group) {
-        groupRepository.update(group);
+    public void updateGroup(Group group, Group oldGroup) {
+        if (group.getName() != null && !group.getName().isEmpty()) oldGroup.setName(group.getName());
+        if (group.getDescription() != null && !group.getDescription().isEmpty())
+            oldGroup.setDescription(group.getDescription());
+        if (group.getCreatedDate() != null && !group.getCreatedDate().isEmpty())
+            oldGroup.setCreatedDate(group.getCreatedDate());
+        groupRepository.update(oldGroup);
     }
 
     public void deleteGroup(Group group) {
@@ -101,6 +106,16 @@ public class GroupService {
     public List<Group> findGroupsWithTask(Task task) {
         return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).stream().anyMatch(user -> userService.getTasksFromUser(user).contains(task))).collect(Collectors.toList());
     }
+
+    public boolean hasUser(Group group, User user) {
+        return getUsersFromGroup(group).contains(user);
+    }
+
+    public boolean hasTask(Group group, Task task) {
+        return getUsersFromGroup(group).stream().anyMatch(user -> userService.getTasksFromUser(user).contains(task));
+    }
+
+
 
     /*
     public void removeAllTasksFromGroup(Group group) {

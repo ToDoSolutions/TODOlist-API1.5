@@ -1,15 +1,18 @@
 package com.todolist.entity;
 
-import com.google.common.base.Objects;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"idUser"})
+@NoArgsConstructor
 public class User implements Comparable<User> {
 
     private Long idUser;
@@ -26,9 +29,6 @@ public class User implements Comparable<User> {
     @Size(max = 50, message = "The location is too long.")
     private String location;
 
-    public User() {
-    }
-
     public static User of(String name, String surname, String email, String avatar, String bio, String location) {
         User user = new User();
         user.setName(name);
@@ -38,20 +38,6 @@ public class User implements Comparable<User> {
         user.setBio(bio);
         user.setLocation(location);
         return user;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equal(idUser, user.idUser);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idUser);
     }
 
     @Override

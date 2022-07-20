@@ -73,8 +73,7 @@ public class TaskRepository {
         task.setIdTask(generatedId++);
         if (tasks.add(task)) {
             return task;
-        }
-        else throw new BadRequestException("Task already exists");
+        } else throw new BadRequestException("Task already exists");
     }
 
     public Task update(Task newTask) {

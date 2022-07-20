@@ -1,19 +1,21 @@
 package com.todolist.entity;
 
-import com.google.common.base.Objects;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@EqualsAndHashCode(of = {"idTask"})
+@NoArgsConstructor
 public class Task implements Comparable<Task> {
     private Long idTask;
+    @Size(max = 50, message = "The title is too long.")
     private String title;
     @Size(max = 200, message = "The description is too long.")
     private String description;
@@ -31,9 +33,6 @@ public class Task implements Comparable<Task> {
     @Pattern(regexp = "[Ss][Ll][Ee][Ee][Pp]|[Ee][Aa][Ss][Yy]|[Mm][Ee][Dd][Ii][Uu][Mm]|[Hh][Aa][Rr][Dd]|[Hh][Aa][Rr][Dd][Cc][Oo][Rr][Ee]|[Ii][_ ][Ww][Aa][Nn][Tt][_ ][Tt][Oo][_ ][Dd][Ii][Ee]", message = "The difficulty is invalid.")
     private String difficulty;
 
-    public Task() {
-    }
-
     public static Task of(String title, String description, String annotation, String status, String finishedDate, String startDate, Long priority, String difficulty) {
         Task task = new Task();
         task.setTitle(title);
@@ -46,20 +45,6 @@ public class Task implements Comparable<Task> {
         task.setDifficulty(difficulty);
         return task;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equal(idTask, task.idTask);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idTask);
-    }
-
 
     @Override
     public int compareTo(Task o) {

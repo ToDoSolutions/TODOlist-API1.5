@@ -12,7 +12,10 @@ import com.todolist.services.TaskService;
 import jakarta.validation.Valid;
 import jakarta.validation.executable.ValidateOnExecution;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -40,7 +43,6 @@ public class TaskResource {
     }
 
 
-
     @GET
     public Response getAllTasks(@QueryParam("order") @DefaultValue("+idTask") String order,
                                 @QueryParam("limit") @DefaultValue("-1") Integer limit,
@@ -66,7 +68,7 @@ public class TaskResource {
             throw new BadRequestException("The fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         // Obtenemos todas las tareas.
         List<ShowTask> tasks = taskService.findAllShowTasks(order);
-        // Definimos el inicio y el extremo.
+        // Definimos el inicio y el final.
         if (limit == -1) limit = tasks.size();
         int start = offset == null || offset < 1 ? 0 : offset - 1; // Donde va a comenzar.
         int end = limit > tasks.size() ? tasks.size() : start + limit; // Donde va a terminar.
@@ -99,7 +101,7 @@ public class TaskResource {
         Task task = taskService.findTaskById(taskId);
         // Comprobamos que existe.
         if (task == null)
-            throw new NotFoundException("Task not found.", Response.created(uriInfo.getAbsolutePathBuilder().path(this.getClass(), "getTask").build(taskId)).status(404).build()); // Comprobamos si se encuentra el objeto en la base de datos chapucera.
+            throw new NotFoundException("Task not found.", Response.created(uriInfo.getRequestUri()).status(404).build()); // Comprobamos si se encuentra el objeto en la base de datos chapucera.
         // Devolvemos la tarea.
         return Response.ok(new ShowTask(task).getFields(fields)).build();
     }
@@ -117,6 +119,7 @@ public class TaskResource {
             throw new BadRequestException("Task description is null or empty.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         if (task.getFinishedDate() == null || task.getFinishedDate().isEmpty())
             throw new BadRequestException("Task finish date is null.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
+        // Si no han dado la fecha de comienzo, damos la fecha de hoy.
         if (task.getStartDate() == null) task.setStartDate(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
         // Creamos un objeto ShowTask para poder mostrar la tarea.
         ShowTask showTask = new ShowTask(task);
@@ -129,16 +132,15 @@ public class TaskResource {
         task = taskService.saveTask(task);
         showTask = new ShowTask(task);
         // Construimos la respuesta.
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(this.getClass(), "getTask")
-                .build(showTask.getIdTask())).entity(showTask).build();
+        return Response.created(uriInfo.getRequestUri()).entity(showTask).build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateTask(@Valid Task task) {
-        if (task.getIdTask() == null) {
+        // Comprobamos que se ha dado una tarea.
+        if (task.getIdTask() == null)
             throw new BadRequestException("Task id is null.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
-        }
         // Buscamos la tarea en la base de datos.
         Task oldTask = taskService.findTaskById(task.getIdTask());
         // Comprobamos si la tarea existe.
@@ -181,10 +183,10 @@ public class TaskResource {
         Task task = taskService.findTaskById(taskId);
         // Comprobamos si se encuentra la tarea en la base de datos.
         if (task == null)
-            throw new NotFoundException("Task not found.", Response.created(uriInfo.getAbsolutePathBuilder()
-                    .path(this.getClass(), "deleteTask").build(taskId)).status(404).build());
+            throw new NotFoundException("Task not found.", Response.created(uriInfo.getRequestUri()).status(404).build());
         // Eliminamos la tarea de la base de datos.
         taskService.deleteTask(task);
+        // Devolvemos la respuesta.
         return Response.noContent().build();
     }
 }

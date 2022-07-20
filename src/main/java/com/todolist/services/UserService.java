@@ -38,7 +38,7 @@ public class UserService {
     }
 
 
-    public List<ShowUser> findAllShowUsers(String order) throws NoSuchMethodException {
+    public List<ShowUser> findAllShowUsers(String order) {
         return userRepository.findAll(order.replace("+", "").replace("-", ""), Sort.parse(order)).stream().map(user -> new ShowUser(user, getShowTaskFromUser(user))).collect(Collectors.toList());
     }
 
@@ -50,8 +50,20 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void updateUser(User user) {
-        userRepository.update(user);
+    public void updateUser(User user, User oldUser) {
+        if (user.getName() != null && !user.getName().isEmpty())
+            oldUser.setName(user.getName());
+        if (user.getSurname() != null && !user.getSurname().isEmpty())
+            oldUser.setSurname(user.getSurname());
+        if (user.getEmail() != null && !user.getEmail().isEmpty())
+            oldUser.setEmail(user.getEmail());
+        if (user.getAvatar() != null && !user.getAvatar().isEmpty())
+            oldUser.setAvatar(user.getAvatar());
+        if (user.getBio() != null && !user.getBio().isEmpty())
+            oldUser.setBio(user.getBio());
+        if (user.getLocation() != null && !user.getLocation().isEmpty())
+            oldUser.setLocation(user.getLocation());
+        userRepository.update(oldUser);
     }
 
     public void deleteUser(User user) {
@@ -100,6 +112,10 @@ public class UserService {
     public void removeAllTasksFromUser(User user) {
         List<UserTask> userTask = userTaskRepository.findByIdUser(user.getIdUser());
         userTaskRepository.deleteAll(userTask);
+    }
+
+    public boolean hasTask(User user, Task task) {
+        return userTaskRepository.findByIdTaskAndIdUser(task.getIdTask(), user.getIdUser()).isEmpty();
     }
 
     /*

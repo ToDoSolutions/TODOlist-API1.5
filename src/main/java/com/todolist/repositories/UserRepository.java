@@ -3,7 +3,6 @@ package com.todolist.repositories;
 import com.todolist.entity.Task;
 import com.todolist.entity.User;
 import jakarta.ws.rs.BadRequestException;
-import lombok.EqualsAndHashCode;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -49,9 +48,14 @@ public class UserRepository {
         return new ArrayList<>(users);
     }
 
-    public List<User> findAll(String order, Sort sort) throws NoSuchMethodException {
+    public List<User> findAll(String order, Sort sort) {
         String nameMethod = "get" + order.substring(0, 1).toUpperCase() + order.substring(1);
-        Method method = User.class.getMethod(nameMethod);
+        Method method;
+        try {
+            method = Task.class.getMethod(nameMethod);
+        } catch (NoSuchMethodException e) {
+            throw new BadRequestException("Order not found");
+        }
         return sort.sort(users, method);
     }
 

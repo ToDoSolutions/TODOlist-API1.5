@@ -1,7 +1,6 @@
 package com.todolist.repositories;
 
 import com.todolist.entity.Group;
-import com.todolist.entity.Task;
 import jakarta.ws.rs.BadRequestException;
 
 import java.lang.reflect.Method;
@@ -39,9 +38,15 @@ public class GroupRepository {
         return new ArrayList<>(groups);
     }
 
-    public List<Group> findAll(String order, Sort sort) throws NoSuchMethodException {
+    public List<Group> findAll(String order, Sort sort) {
         String nameMethod = "get" + order.substring(0, 1).toUpperCase() + order.substring(1);
-        Method method = Group.class.getMethod(nameMethod);
+        Method method;
+        try {
+            method = Group.class.getMethod(nameMethod);
+        } catch (NoSuchMethodException e) {
+            throw new BadRequestException("Order not found");
+        }
+
         return sort.sort(groups, method);
     }
 
