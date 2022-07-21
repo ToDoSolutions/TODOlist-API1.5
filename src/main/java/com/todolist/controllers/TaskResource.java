@@ -99,6 +99,9 @@ public class TaskResource {
                             @Context UriInfo uriInfo) {
         // Buscamos la tarea en la base de datos.
         Task task = taskService.findTaskById(taskId);
+        // Comprobamos que los campos dados pertenecen a una tarea.
+        if (!(Arrays.stream(fields.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         // Comprobamos que existe.
         if (task == null)
             throw new NotFoundException("Task not found.", Response.created(uriInfo.getRequestUri()).status(404).build()); // Comprobamos si se encuentra el objeto en la base de datos chapucera.

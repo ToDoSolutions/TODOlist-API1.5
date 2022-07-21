@@ -14,6 +14,7 @@ public class HandleBadRequestException implements ExceptionMapper<BadRequestExce
     public Response toResponse(BadRequestException exception) {
         System.out.println("HandleBadRequestException");
         String url = " --- ";
+        System.out.println(exception.getMessage());
         URI location = exception.getResponse().getLocation();
         if (location != null)
             url = location.getPath();

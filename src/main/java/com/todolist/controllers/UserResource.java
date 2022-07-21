@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.executable.ValidateOnExecution;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 
 @ValidateOnExecution
 @Path("/users")
-@Produces("application/json")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
     protected static UserResource instance = null; // La instancia inicialmente no existe, se crea al ejecutar .getInstance().
@@ -32,7 +33,7 @@ public class UserResource {
     final UserService userService;
     final TaskService taskService;
 
-    private UserResource() {
+    public UserResource() {
         userService = UserService.getInstance();
         taskService = TaskService.getInstance();
     }
@@ -53,12 +54,12 @@ public class UserResource {
                            @QueryParam("surname") String surname,
                            @QueryParam("email") String email,
                            @QueryParam("location") String location,
-                           @QueryParam("taskCompleted") NumberFilter taskCompleted) {
+                           @QueryParam("taskCompleted") @DefaultValue("null") NumberFilter taskCompleted) {
         // Creamos una lista para almacenar las tareas.
         List<ShowUser> result = Lists.newArrayList();
         // Comprobamos que el criterio de ordenación sea correcto.
         String propertyOrder = order.charAt(0) == '+' || order.charAt(0) == '-' ? order.substring(1) : order;
-        if (Arrays.stream(ShowTask.ALL_ATTRIBUTES.split(",")).noneMatch(prop -> prop.equalsIgnoreCase(propertyOrder)))
+        if (Arrays.stream(ShowUser.ALL_ATTRIBUTES.split(",")).noneMatch(prop -> prop.equalsIgnoreCase(propertyOrder)))
             throw new BadRequestException("The order is invalid.", Response.created(URI.create("/api/v1/users")).status(400).build());
         // Comprobamos que los campos dados pertenecen a un usuario.
         if (!(Arrays.stream(fieldsUser.split(",")).allMatch(field -> ShowUser.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
@@ -95,6 +96,12 @@ public class UserResource {
                             @Context UriInfo uriInfo) {
         // Buscamos el usuario en la base de datos.
         User user = userService.findUserById(userId);
+        // Comprobamos que los campos dados pertenecen a un usuario.
+        if (!(Arrays.stream(fieldsUser.split(",")).allMatch(field -> ShowUser.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The users' fields are invalid.", Response.created(URI.create("/api/v1/users")).status(400).build());
+        // Comprobamos que los campos dados pertenecen a una tarea.
+        if (!(Arrays.stream(fieldsTask.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The tasks' fields are invalid.", Response.created(URI.create("/api/v1/users")).status(400).build());
         // Comprobamos que existe.
         if (user == null)
             throw new NotFoundException("The user with id " + userId + " does not exist.", Response.created(uriInfo.getRequestUri()).status(404).build());
@@ -103,7 +110,7 @@ public class UserResource {
     }
 
     @POST
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(@Context UriInfo uriInfo, @Valid User user) {
         // Comprobamos que se ha dado un usuario.
         if (user == null)
@@ -124,7 +131,7 @@ public class UserResource {
     }
 
     @PUT
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUser(@Valid User user) {
         // Comprobamos que se ha dado un usuario.
         if (user == null)

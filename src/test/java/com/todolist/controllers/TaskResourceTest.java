@@ -35,7 +35,6 @@ public class TaskResourceTest extends JerseyTest {
         );
     }
 
-
     // GetAll
     @Test
     public void testGetAllFine() {

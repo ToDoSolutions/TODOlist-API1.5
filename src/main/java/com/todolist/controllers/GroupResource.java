@@ -35,7 +35,7 @@ public class GroupResource {
     final UserService userService;
     final TaskService taskService;
 
-    private GroupResource() {
+    public GroupResource() {
         groupService = GroupService.getInstance();
         userService = UserService.getInstance();
         taskService = TaskService.getInstance();
@@ -55,17 +55,19 @@ public class GroupResource {
                            @QueryParam("fieldsTask") @DefaultValue(ShowTask.ALL_ATTRIBUTES) String fieldsTask,
                            @QueryParam("name") String name,
                            @QueryParam("description") String description,
-                           @QueryParam("numTasks") NumberFilter numTasks,
-                           @QueryParam("createdDate") DateFilter createdDate) {
+                           @QueryParam("numTasks") @DefaultValue("null") NumberFilter numTasks,
+                           @QueryParam("createdDate") @DefaultValue("null") DateFilter createdDate) {
         // Creamos una lista para almacenar los grupos.
         List<ShowGroup> result = Lists.newArrayList();
         // Comprobamos que el criterio de ordenación sea correcto.
         String propertyOrder = order.charAt(0) == '+' || order.charAt(0) == '-' ? order.substring(1) : order;
+        if (Arrays.stream(ShowGroup.ALL_ATTRIBUTES.split(",")).noneMatch(prop -> prop.equalsIgnoreCase(propertyOrder)))
+            throw new BadRequestException("The order is invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         // Comprobamos que los campos dados pertenecen a un grupo.
-        if (!(Arrays.stream(fieldsGroup.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+        if (!(Arrays.stream(fieldsGroup.split(",")).allMatch(field -> ShowGroup.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
             throw new BadRequestException("The groups' fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         // Comprobamos que los campos dados pertenecen a un usuario.
-        if (!(Arrays.stream(fieldsUser.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+        if (!(Arrays.stream(fieldsUser.split(",")).allMatch(field -> ShowUser.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
             throw new BadRequestException("The users' fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         // Comprobamos que los campos dados pertenecen a una tarea.
         if (!(Arrays.stream(fieldsTask.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
@@ -99,6 +101,15 @@ public class GroupResource {
                              @Context UriInfo uriInfo) {
         // Buscamos la tarea en la base de datos.
         Group group = groupService.findGroupById(groupId);
+        // Comprobamos que los campos dados pertenecen a un grupo.
+        if (!(Arrays.stream(fieldsGroup.split(",")).allMatch(field -> ShowGroup.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The groups' fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
+        // Comprobamos que los campos dados pertenecen a un usuario.
+        if (!(Arrays.stream(fieldsUser.split(",")).allMatch(field -> ShowUser.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The users' fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
+        // Comprobamos que los campos dados pertenecen a una tarea.
+        if (!(Arrays.stream(fieldsTask.split(",")).allMatch(field -> ShowTask.ALL_ATTRIBUTES.toLowerCase().contains(field.toLowerCase()))))
+            throw new BadRequestException("The tasks' fields are invalid.", Response.created(URI.create("/api/v1/tasks")).status(400).build());
         // Comprobamos que existe.
         if (group == null)
             throw new NotFoundException("The group with id " + groupId + " does not exist.", Response.created(uriInfo.getRequestUri()).status(404).build());
@@ -117,7 +128,7 @@ public class GroupResource {
             throw new BadRequestException("The group's name is null or empty.", Response.created(uriInfo.getRequestUri()).status(400).build());
         // Si no han dado la fecha en la que se creó, damos la fecha de hoy.
         if (group.getCreatedDate() == null) group.setCreatedDate(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
-        // Añadimos el grupoa a la base de datos.
+        // Añadimos el grupo a la base de datos.
         group = groupService.saveGroup(group);
         // Construimos la respuesta.
         return Response.created(uriInfo.getRequestUri()).entity(new ShowGroup(group, groupService.getShowUserFromGroup(group))).build();

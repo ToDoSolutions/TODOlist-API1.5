@@ -1,5 +1,6 @@
 package com.todolist.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.todolist.entity.Group;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -20,6 +22,7 @@ import java.util.stream.Stream;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ShowGroup {
 
     public static final String ALL_ATTRIBUTES = "idGroup,name,description,createdDate,users,numTasks";
@@ -38,6 +41,7 @@ public class ShowGroup {
         this.users = users;
     }
 
+    @JsonIgnore
     public Long getNumTasks() {
         return (long) users.stream()
                 .flatMap(user -> user.getTasks().stream().map(ShowTask::getIdTask))

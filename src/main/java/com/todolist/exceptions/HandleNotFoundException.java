@@ -13,6 +13,7 @@ public class HandleNotFoundException implements ExceptionMapper<NotFoundExceptio
     @Override
     public Response toResponse(NotFoundException exception) {
         String url = " --- ";
+
         URI location = exception.getResponse().getLocation();
         if (location != null)
             url = location.getPath();

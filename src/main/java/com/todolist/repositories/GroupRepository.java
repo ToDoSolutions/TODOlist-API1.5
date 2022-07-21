@@ -28,10 +28,15 @@ public class GroupRepository {
         return instance;
     }
 
-    private void generateData() {
+    public void generateData() {
         save(Group.of("Pepe", "Solo quieren ver el mundo arder", "2006-10-12"));
         save(Group.of("Otakus", "Dicen que su factura del agua es negativa", "2022-05-06"));
         save(Group.of("AISS enjoyers", "Se dice que son seres que existen desde el inicio de los multiversos", "2000-03-09"));
+    }
+
+    public void deleteData() {
+        generatedId = 0L;
+        groups.clear();
     }
 
     public List<Group> findAll() {

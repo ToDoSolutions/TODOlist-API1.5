@@ -18,13 +18,14 @@ public class GroupService {
 
     private final UserTaskRepository userTaskRepository;
     private final GroupUserRepository groupUserRepository;
-    private UserService userService;
+    private final UserService userService;
 
     private GroupService() {
         groupRepository = GroupRepository.getInstance();
         userRepository = UserRepository.getInstance();
         userTaskRepository = UserTaskRepository.getInstance();
         groupUserRepository = GroupUserRepository.getInstance();
+        userService = UserService.getInstance();
     }
 
     public static GroupService getInstance() {
@@ -58,13 +59,15 @@ public class GroupService {
     }
 
     public List<User> getUsersFromGroup(Group group) {
-        return groupUserRepository.findByIdGroup(group.getIdGroup()).stream()
-                .map(groupUser -> userRepository.findByIdUser(groupUser.getIdUser()))
+        return groupUserRepository.findByIdGroup(group.getIdGroup())
+                .stream().map(groupUser -> userRepository.findByIdUser(groupUser.getIdUser()))
                 .collect(Collectors.toList());
     }
 
     public List<ShowUser> getShowUserFromGroup(Group group) {
-        return getUsersFromGroup(group).stream().map(user -> new ShowUser(user, userService.getShowTaskFromUser(user))).collect(Collectors.toList());
+        return getUsersFromGroup(group)
+                .stream().map(user -> new ShowUser(user, userService.getShowTaskFromUser(user)))
+                .collect(Collectors.toList());
     }
 
     public void addUserToGroup(Group group, User user) {

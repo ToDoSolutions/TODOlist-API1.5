@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="13" failures="0" name="com.todolist.controllers.TaskResourceTest" time="1.968" errors="0" skipped="0">
+<testsuite tests="13" failures="0" name="com.todolist.controllers.TaskResourceTest" time="4.172" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.15+10-Ubuntu-0ubuntu0.20.04.1"/>
@@ -59,17 +59,17 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPostWithWrongDate" time="0.377"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPostWithOutTitle" time="0.147"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testDeleteNotFound" time="0.134"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetSoloFine" time="0.159"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetAllWrong" time="0.162"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPutFine" time="0.137"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetAllFine" time="0.136"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPutWithOutID" time="0.115"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetAllWithQueryParamFine" time="0.116"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetSoloNotFound" time="0.1"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPutWithWrongDate" time="0.109"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testDeleteFine" time="0.136"/>
-  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPostFine" time="0.14"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPostWithWrongDate" time="2.586"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPostWithOutTitle" time="0.166"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testDeleteNotFound" time="0.137"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetSoloFine" time="0.155"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetAllWrong" time="0.118"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPutFine" time="0.184"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetAllFine" time="0.14"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPutWithOutID" time="0.129"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetAllWithQueryParamFine" time="0.111"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testGetSoloNotFound" time="0.097"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPutWithWrongDate" time="0.115"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testDeleteFine" time="0.112"/>
+  <testcase classname="com.todolist.controllers.TaskResourceTest" name="testPostFine" time="0.122"/>
 </testsuite>
