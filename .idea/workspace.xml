@@ -50,27 +50,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/alex0/eclipse-workspace/simple-heroku-webapp/src/main/java/com/todolist/controllers&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;5ef4768f8fca2ce907ca3aa3d1186a2d&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/alex0/eclipse-workspace/simple-heroku-webapp/src/main/java/com/todolist/entity/pokemon",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "5ef4768f8fca2ce907ca3aa3d1186a2d"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\entity\pokemon" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\controllers" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp\docs" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\filters" />
-      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\converters" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\converters" />
@@ -260,7 +260,9 @@
       <workItem from="1658330629807" duration="422000" />
       <workItem from="1658331256313" duration="4788000" />
       <workItem from="1658394943165" duration="3818000" />
-      <workItem from="1658416873763" duration="5654000" />
+      <workItem from="1658416873763" duration="5970000" />
+      <workItem from="1658429168800" duration="20000" />
+      <workItem from="1658566352100" duration="5178000" />
     </task>
     <servers />
   </component>

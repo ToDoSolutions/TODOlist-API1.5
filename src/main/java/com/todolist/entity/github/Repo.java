@@ -93,7 +93,7 @@ import java.util.Map;
         "subscribers_count"
 })
 @Generated("jsonschema2pojo")
-public class TaskGitHub {
+public class Repo {
 
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();

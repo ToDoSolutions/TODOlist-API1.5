@@ -11,8 +11,6 @@ d
 4src/main/java/com/todolist/entity/github/Parent.java,5\d\5d5dcd42d37ccb276b35e09ff45aa7da15d26bc7
 d
 4src/main/java/com/todolist/entity/github/Source.java,1\5\15e594c34f92851f1d0b7e54d9612eb1cabd06bb
-f
-6src/main/java/com/todolist/entity/pokemon/Pokemon.java,8\c\8c7803e8fd1adfab385193519be3cee9bbaf5100
 c
 3src/main/java/com/todolist/entity/pokemon/Stat.java,3\a\3af8fd57ad444285d272ec7ca3a201fb6ac6c39f
 c
@@ -39,8 +37,6 @@ o
 ?src/main/java/com/todolist/repositories/UserTaskRepository.java,0\5\05a52572249287856da2b6f0b04ef9329b1ad0f9
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-d
-4src/main/java/com/todolist/services/TaskService.java,1\4\1459d463d04ffa6a93e3cdbccd495182409543e7
 l
 <src/main/java/com/todolist/exceptions/ExceptionResponse.java,7\3\73a9ddeb8347a9cfd1dd8fde1fd067404feb9068
 k
@@ -83,3 +79,9 @@ r
 Bsrc/main/java/com/todolist/exceptions/HandleNotFoundException.java,9\3\935852a3599da0d93a5f3a0b291631c7480c47fd
 t
 Dsrc/main/java/com/todolist/exceptions/HandleBadRequestException.java,c\d\cd6dc1eb670d18046f8d6c3e59f7fb41f52d15ce
+]
+-src/main/java/com/todolist/dtos/ShowUser.java,0\9\09e9049029a5084d21b69ad9475b5631b2a1dc22
+l
+<src/test/java/com/todolist/controllers/TaskResourceTest.java,5\1\51629e41010c4df7cc29896800c1790d2f4b923b
+l
+<src/test/java/com/todolist/controllers/UserResourceTest.java,e\1\e1573f40e7342ec0fb08494b837fd2d797dd49df
