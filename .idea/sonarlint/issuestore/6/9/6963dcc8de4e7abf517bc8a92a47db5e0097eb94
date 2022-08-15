@@ -1,0 +1,12 @@
+
+l
+java:S1192k"QDefine a constant instead of duplicating this literal " does not exist." 7 times.(üºàüÿÿÿÿ
+j
+java:S1192?"ODefine a constant instead of duplicating this literal "/api/v1/users" 10 times.(×áèÁüÿÿÿÿ
+m
+java:S1192k"RDefine a constant instead of duplicating this literal "The user with id " 6 times.(üºàüÿÿÿÿ
+R	java:S1070"=Method has 10 parameters, which is greater than 7 authorized.(Çô¤Ã
+Z
+java:S2583m"DChange this condition so that it does not always evaluate to "false"(àÀ±
+h
+java:S37760"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(Çô¤Ã

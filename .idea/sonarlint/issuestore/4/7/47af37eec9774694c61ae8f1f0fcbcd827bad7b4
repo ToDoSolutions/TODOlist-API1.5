@@ -1,0 +1,8 @@
+
+j
+java:S1192A"ODefine a constant instead of duplicating this literal "/api/v1/tasks" 13 times.(ë•Ü¾ıÿÿÿÿ
+R	java:S107/"=Method has 13 parameters, which is greater than 7 authorized.(‰“ÒÄ
+h
+java:S3776/"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(‰“ÒÄ
+n
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Ò½òµúÿÿÿÿ

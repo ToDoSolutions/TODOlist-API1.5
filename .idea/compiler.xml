@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="simple-heroku-webapp" />
+        <module name="TODOlist-API1.5" />
       </profile>
     </annotationProcessing>
   </component>

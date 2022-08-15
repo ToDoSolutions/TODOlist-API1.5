@@ -1,0 +1,20 @@
+
+f	java:S117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô·µÏ
+E
+java:S5411]"*Use the primitive boolean expression here.(ÈÄÍ²ùÿÿÿÿ
+E
+java:S5411`"*Use the primitive boolean expression here.(ÈÄÍ²ùÿÿÿÿ
+E
+java:S5411o"*Use the primitive boolean expression here.(ÈÄÍ²ùÿÿÿÿ
+Z
+java:S2095"DUse try-with-resources or close this "Client" in a "finally" clause.(ØÑû¼
+_
+java:S2095&"DUse try-with-resources or close this "Client" in a "finally" clause.(•Äøıÿÿÿÿ
+>
+java:S38643"!Remove this use of "Stream.peek".(ÍãÚ›8ï¢ë†ª0
+>
+java:S38642"!Remove this use of "Stream.peek".(ñ ëˆ8åøí†ª0
+U	java:S1062"9Replace this use of System.out or System.err by a logger.(ñ ëˆ8ğ¢ë†ª0
+U	java:S1063"9Replace this use of System.out or System.err by a logger.(ÍãÚ›8çøí†ª0
+_
+java:S3358T"DExtract this nested ternary operation into an independent statement.(Åıˆùÿÿÿÿ
