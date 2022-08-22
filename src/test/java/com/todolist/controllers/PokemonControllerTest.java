@@ -16,6 +16,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -25,7 +27,7 @@ public class PokemonControllerTest extends JerseyTest {
     protected Application configure() {
         return new ResourceConfig(
                 // Resource
-                PokemonController.class,
+                PokemonController.class, TaskController.class,
                 // Converters
                 StatusConverter.class, DateFilterConverter.class, DifficultyConverter.class, NumberFilterConverter.class,
                 // Exceptions
@@ -36,12 +38,7 @@ public class PokemonControllerTest extends JerseyTest {
     // GetAll
     @Test
     public void testGetAllFine() {
-<<<<<<<HEAD
-        final ShowTask[] responseMsg = target().path("pokemon")
-                .request().get(ShowTask[].class);
-=======
         final ShowTask[] responseMsg = target().path("pokemon").request().get(ShowTask[].class);
->>>>>>>f084247764a602892254a043ff300d1c698f57ab
         assertTrue("No se han encontrado datos.", responseMsg != null && responseMsg.length > 0);
     }
 
@@ -75,5 +72,9 @@ public class PokemonControllerTest extends JerseyTest {
         final ShowTask responseMsg = target().path("pokemon/wingull")
                 .queryParam("days", 4).request().post(Entity.json(null), ShowTask.class);
         assertNotNull("No se ha encontrado el dato.", responseMsg);
+        final ShowTask[] responseMsg2 = target().path("tasks")
+                .queryParam("title", "Catch: Wingull")
+                .request().get(ShowTask[].class);
+        assertNotNull("No se ha encontrado el dato.", responseMsg2);
     }
 }

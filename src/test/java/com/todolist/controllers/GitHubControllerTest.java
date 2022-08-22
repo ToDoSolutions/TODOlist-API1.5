@@ -94,7 +94,7 @@ public class GitHubControllerTest extends JerseyTest {
     // GetSolo
     @Test
     public void testGetSoloRepoFine() {
-        final ShowTask responseMsg = target().path("github/repos/alesanfe/todolist")
+        final ShowTask responseMsg = target().path("github/alesanfe/TODOlist-API")
                 .request().get(ShowTask.class);
         assertNotNull("No se ha encontrado el dato.", responseMsg);
     }
@@ -102,7 +102,7 @@ public class GitHubControllerTest extends JerseyTest {
     @Test
     public void testGetSoloRepoNotFound() {
         try {
-            target().path("github/repos/alesanfe/AAA").request().get(ShowTask.class);
+            target().path("github/alesanfe/AAA").request().get(ShowTask.class);
         } catch (BadRequestException e) {
             assertTrue("No se ha encontrado el dato.", true);
         }
