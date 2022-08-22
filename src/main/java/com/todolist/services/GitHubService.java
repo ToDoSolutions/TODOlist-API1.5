@@ -1,5 +1,6 @@
 package com.todolist.services;
 
+import com.todolist.dtos.ShowTask;
 import com.todolist.entity.Task;
 import com.todolist.entity.User;
 import com.todolist.entity.github.Owner;
@@ -7,6 +8,8 @@ import com.todolist.entity.github.Repo;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.client.ClientBuilder;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class GitHubService {
 
-    String startUrl = "https://api.github.com/users/";
+    String startUrl = "https://api.github.com";
     private static GitHubService instance = null;
 
     public static GitHubService getInstance() {
@@ -58,7 +61,8 @@ public class GitHubService {
     }
 
     public List<Task> findAllTasks(String username) {
-        return Arrays.stream(findAllRepo(username)).map(repo -> repoIntoTask(repo, null, null, null, null)).collect(Collectors.toList());
+        return Arrays.stream(findAllRepo(username)).map(repo -> repoIntoTask(repo, null, LocalDate.now().format(DateTimeFormatter.ISO_DATE), null, null))
+                .collect(Collectors.toList());
     }
 
     public Task repoIntoTask(Repo repo, String status, String finishedDate, Long priority, String difficulty) {

@@ -33,7 +33,7 @@ public class PokemonService {
     }
 
     public Pokemon findPokemonByName(String name) {
-        String url = startUrl + name;
+        String url = startUrl + name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         try {
             return ClientBuilder.newClient().target(url).request().get(Pokemon.class);
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class PokemonService {
     }
 
     public List<Task> findAllPokemonTask() {
-        return Arrays.asList(findAllPokemon()).stream().map(this::pokemonIntoTask).collect(Collectors.toList());
+        return Arrays.stream(findAllPokemon()).map(this::pokemonIntoTask).collect(Collectors.toList());
     }
 
     public Task pokemonIntoTask(Pokemon pokemon) {
@@ -58,6 +58,8 @@ public class PokemonService {
             types.append(pokemon.getType1()).append("/").append(pokemon.getType2());
         task.setTitle("Catch: " + pokemon.getName());
         task.setDescription("Type pokemon: " + types);
+        task.setStartDate(LocalDate.now().toString());
+        task.setFinishedDate(LocalDate.now().toString());
         task.setAnnotation(getAnnotation(pokemon));
         task.setDifficulty(getDifficulty(pokemon));
         return task;

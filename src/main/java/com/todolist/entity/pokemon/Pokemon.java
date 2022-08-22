@@ -3,7 +3,6 @@ package com.todolist.entity.pokemon;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.annotation.Generated;
 
-import javax.annotation.Generated;
 import java.util.HashMap;
 import java.util.Map;
 

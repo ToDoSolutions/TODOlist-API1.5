@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class HandleConstraintViolationException implements ExceptionMapper<ConstraintViolationException> {
 
     @Override
-    public jakarta.ws.rs.core.Response toResponse(ConstraintViolationException exception) {
+    public Response toResponse(ConstraintViolationException exception) {
         System.out.println("HandleConstraintViolationException");
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity(new ExceptionResponse(

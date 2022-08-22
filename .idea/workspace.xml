@@ -22,6 +22,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1-sources.jar!/org/junit/Before.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -52,25 +53,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Project.color": "583c2f",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/alex0/eclipse-workspace/simple-heroku-webapp/src/main/java/com/todolist/entity/pokemon",
+    "last_opened_file_path": "C:/Users/alex0/eclipse-workspace/simple-heroku-webapp",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "spring.configuration.checksum": "5ef4768f8fca2ce907ca3aa3d1186a2d"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\entity\pokemon" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\controllers" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp\docs" />
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\webapp" />
-      <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\filters" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alex0\eclipse-workspace\simple-heroku-webapp\src\main\java\com\todolist\converters" />
@@ -84,9 +86,9 @@
       <recent name="com.todolist" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GroupResourceTest">
-    <configuration name="GroupResourceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="simple-heroku-webapp" />
+  <component name="RunManager" selected="JUnit.GitHubControllerTest.testAddRepoNotFound">
+    <configuration name="GitHubControllerTest.testAddRepoFine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TODOlist-API" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.todolist.controllers.*" />
@@ -94,30 +96,15 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.todolist.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GroupResourceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GroupResourceTest.testPostFine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="simple-heroku-webapp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.todolist.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GroupResourceTest" />
-      <option name="METHOD_NAME" value="testPostFine" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GitHubControllerTest" />
+      <option name="METHOD_NAME" value="testAddRepoFine" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GroupResourceTest.testPostWithOutName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="simple-heroku-webapp" />
+    <configuration name="GitHubControllerTest.testAddRepoNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TODOlist-API" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.todolist.controllers.*" />
@@ -125,15 +112,15 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.todolist.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GroupResourceTest" />
-      <option name="METHOD_NAME" value="testPostWithOutName" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GitHubControllerTest" />
+      <option name="METHOD_NAME" value="testAddRepoNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GroupResourceTest.testPostWithWrongDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="simple-heroku-webapp" />
+    <configuration name="GitHubControllerTest.testAddUserFine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TODOlist-API" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.todolist.controllers.*" />
@@ -141,15 +128,15 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.todolist.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GroupResourceTest" />
-      <option name="METHOD_NAME" value="testPostWithWrongDate" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GitHubControllerTest" />
+      <option name="METHOD_NAME" value="testAddUserFine" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GroupResourceTest.testPutWithWrongDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="simple-heroku-webapp" />
+    <configuration name="GitHubControllerTest.testAddUserNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TODOlist-API" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.todolist.controllers.*" />
@@ -157,8 +144,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.todolist.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GroupResourceTest" />
-      <option name="METHOD_NAME" value="testPutWithWrongDate" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GitHubControllerTest" />
+      <option name="METHOD_NAME" value="testAddUserNotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GitHubControllerTest.testGetAllRepoFine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TODOlist-API" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.todolist.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.todolist.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.todolist.controllers.GitHubControllerTest" />
+      <option name="METHOD_NAME" value="testGetAllRepoFine" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -223,21 +226,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.GroupResourceTest" />
-      <item itemvalue="JUnit.GroupResourceTest.testPostFine" />
-      <item itemvalue="JUnit.GroupResourceTest.testPostWithOutName" />
-      <item itemvalue="JUnit.GroupResourceTest.testPostWithWrongDate" />
-      <item itemvalue="JUnit.GroupResourceTest.testPutWithWrongDate" />
+      <item itemvalue="JUnit.GitHubControllerTest.testAddRepoFine" />
+      <item itemvalue="JUnit.GitHubControllerTest.testAddRepoNotFound" />
+      <item itemvalue="JUnit.GitHubControllerTest.testAddUserFine" />
+      <item itemvalue="JUnit.GitHubControllerTest.testAddUserNotFound" />
+      <item itemvalue="JUnit.GitHubControllerTest.testGetAllRepoFine" />
       <item itemvalue="Maven.simple-heroku-webapp [clean,install]" />
       <item itemvalue="Swagger Codegen.swagger.yaml.yaml" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GroupResourceTest" />
-        <item itemvalue="JUnit.GroupResourceTest.testPostWithWrongDate" />
-        <item itemvalue="JUnit.GroupResourceTest.testPostWithOutName" />
-        <item itemvalue="JUnit.GroupResourceTest.testPostFine" />
-        <item itemvalue="JUnit.GroupResourceTest.testPutWithWrongDate" />
+        <item itemvalue="JUnit.GitHubControllerTest.testAddRepoNotFound" />
+        <item itemvalue="JUnit.GitHubControllerTest.testAddRepoFine" />
+        <item itemvalue="JUnit.GitHubControllerTest.testGetAllRepoFine" />
+        <item itemvalue="JUnit.GitHubControllerTest.testAddUserNotFound" />
+        <item itemvalue="JUnit.GitHubControllerTest.testAddUserFine" />
       </list>
     </recent_temporary>
   </component>
@@ -262,7 +265,19 @@
       <workItem from="1658394943165" duration="3818000" />
       <workItem from="1658416873763" duration="5970000" />
       <workItem from="1658429168800" duration="20000" />
-      <workItem from="1658566352100" duration="5178000" />
+      <workItem from="1658566352100" duration="6278000" />
+      <workItem from="1658595033542" duration="2703000" />
+      <workItem from="1658602585682" duration="1874000" />
+      <workItem from="1658654487595" duration="3168000" />
+      <workItem from="1659278907306" duration="1639000" />
+      <workItem from="1659600602083" duration="2965000" />
+      <workItem from="1659603701474" duration="228000" />
+      <workItem from="1659604110665" duration="3304000" />
+      <workItem from="1659607769436" duration="2087000" />
+      <workItem from="1659610007285" duration="94000" />
+      <workItem from="1660553139782" duration="819000" />
+      <workItem from="1660554442885" duration="62000" />
+      <workItem from="1661192626754" duration="3019000" />
     </task>
     <servers />
   </component>
