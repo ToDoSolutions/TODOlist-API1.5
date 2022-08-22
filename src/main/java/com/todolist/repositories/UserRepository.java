@@ -74,18 +74,16 @@ public class UserRepository {
         else throw new BadRequestException("User already exists");
     }
 
-    public User update(User newUser) {
+    public void update(User newUser) {
         users = users.stream().map(user -> {
             if (newUser.getIdUser().equals(user.getIdUser())) return newUser;
             else return user;
         }).collect(Collectors.toCollection(TreeSet::new));
-        return newUser;
     }
 
-    public User delete(User user) {
+    public void delete(User user) {
         if (!users.remove(user)) throw new BadRequestException("User not found");
         groupUserRepository.deleteAll(groupUserRepository.findByIdUser(user.getIdUser()));
         userTaskRepository.deleteAll(userTaskRepository.findByIdUser(user.getIdUser()));
-        return user;
     }
 }

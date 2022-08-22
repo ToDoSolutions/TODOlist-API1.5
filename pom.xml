@@ -55,13 +55,11 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
             <version>${jetty.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>${jetty.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -122,23 +120,7 @@
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-bean-validation</artifactId>
-            <version>3.0.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-maven-lombok</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
+            <version>3.0.6</version>
         </dependency>
     </dependencies>
 
@@ -241,5 +223,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>11.0.9</jetty.version>
         <kotlin.version>1.7.20-Beta</kotlin.version>
+        <jetty.version>11.0.11</jetty.version>
     </properties>
 </project>

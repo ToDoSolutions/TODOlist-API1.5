@@ -17,8 +17,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
-import java.util.Arrays;
-
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class GitHubControllerTest extends JerseyTest {
@@ -41,7 +40,7 @@ public class GitHubControllerTest extends JerseyTest {
     public void testGetSoloUserFine() {
         final ShowUser responseMsg = target().path("github/alesanfe")
                 .request().get(ShowUser.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
     }
 
     @Test
@@ -58,11 +57,11 @@ public class GitHubControllerTest extends JerseyTest {
     public void testAddUserFine() {
         final ShowUser responseMsg = target().path("github/alesanfe")
                 .request().post(Entity.entity(new ShowUser(), "application/json"), ShowUser.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
         final ShowUser[] responseMsg2 = target().path("users")
                 .queryParam("name", "Alejandro")
                 .request().get(ShowUser[].class);
-        assertTrue("No se ha encontrado el dato.", responseMsg2 != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg2);
     }
 
     @Test
@@ -97,7 +96,7 @@ public class GitHubControllerTest extends JerseyTest {
     public void testGetSoloRepoFine() {
         final ShowTask responseMsg = target().path("github/repos/alesanfe/todolist")
                 .request().get(ShowTask.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
     }
 
     @Test
@@ -115,11 +114,11 @@ public class GitHubControllerTest extends JerseyTest {
         final ShowTask responseMsg = target().path("github/alesanfe/TODOlist-API")
                 .queryParam("finishedDate", "2023-01-01")
                 .request().post(Entity.entity(new ShowTask(), "application/json"), ShowTask.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
         final ShowTask[] responseMsg2 = target().path("tasks")
                 .queryParam("title", "TODOlist-API")
                 .request().get(ShowTask[].class);
-        assertTrue("No se ha encontrado el dato.", responseMsg2 != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg2);
     }
 
     @Test

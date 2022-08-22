@@ -96,7 +96,7 @@ import java.util.Map;
 public class Repo {
 
     @JsonIgnore
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<>();
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("node_id")

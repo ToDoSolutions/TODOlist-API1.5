@@ -35,13 +35,13 @@ public class TaskRepository {
     }
 
     public void generateData() {
-        save(Task.of("Vacaciones", "Quiero vacaciones", "Vacaciones", Status.DRAFT.toString(), "2020-01-31", "2020-01-01", 5l, Difficulty.HARDCORE.toString()));
-        save(Task.of("Bronce", "Salir de bronce en el lol", "Quiero subir o mantenerme no bajar a hierro", Status.IN_PROGRESS.toString(), "2022-12-15", "2021-01-01", 5l, Difficulty.I_WANT_TO_DIE.toString()));
-        save(Task.of("Aceitunas", "Comprar aceitunas sin hueso", "Sin hueso pero con pepinillo", Status.IN_PROGRESS.toString(), "2022-05-29", "2022-05-19", 2l, Difficulty.MEDIUM.toString()));
-        save(Task.of("VIVA ER BETIS", "Ver el betis", "err Betiss", Status.DONE.toString(), "2022-08-08", "2022-08-07", 5l, Difficulty.EASY.toString()));
-        save(Task.of("Entrenador Pokemon", "Completar la pokedex para el profesor Oak", "Hazte con todos, los 892...", Status.IN_REVISION.toString(), "2022-11-30", "2021-05-17", 3l, Difficulty.I_WANT_TO_DIE.toString()));
-        save(Task.of("Comprar mando nuevo", "Nuevo mando para jugar elden ring", "Comprar uno a prueba de enfados", Status.DRAFT.toString(), "2022-06-06", "2022-01-19", 4l, Difficulty.MEDIUM.toString()));
-        save(Task.of("¿Aprender Inglés? Na", "El inglés se enseña mal y punto", "Como aprendo el inglés si ni se el español", Status.CANCELLED.toString(), "2023-05-26", "2020-04-22", 0l, Difficulty.HARDCORE.toString()));
+        save(Task.of("Vacaciones", "Quiero vacaciones", "Vacaciones", Status.DRAFT.toString(), "2020-01-31", "2020-01-01", 5L, Difficulty.HARDCORE.toString()));
+        save(Task.of("Bronce", "Salir de bronce en el lol", "Quiero subir o mantenerme no bajar a hierro", Status.IN_PROGRESS.toString(), "2022-12-15", "2021-01-01", 5L, Difficulty.I_WANT_TO_DIE.toString()));
+        save(Task.of("Aceitunas", "Comprar aceitunas sin hueso", "Sin hueso pero con pepinillo", Status.IN_PROGRESS.toString(), "2022-05-29", "2022-05-19", 2L, Difficulty.MEDIUM.toString()));
+        save(Task.of("VIVA ER BETIS", "Ver el betis", "err Betiss", Status.DONE.toString(), "2022-08-08", "2022-08-07", 5L, Difficulty.EASY.toString()));
+        save(Task.of("Entrenador Pokemon", "Completar la pokedex para el profesor Oak", "Hazte con todos, los 892...", Status.IN_REVISION.toString(), "2022-11-30", "2021-05-17", 3L, Difficulty.I_WANT_TO_DIE.toString()));
+        save(Task.of("Comprar mando nuevo", "Nuevo mando para jugar elden ring", "Comprar uno a prueba de enfados", Status.DRAFT.toString(), "2022-06-06", "2022-01-19", 4L, Difficulty.MEDIUM.toString()));
+        save(Task.of("¿Aprender Inglés? Na", "El inglés se enseña mal y punto", "Como aprendo el inglés si ni se el español", Status.CANCELLED.toString(), "2023-05-26", "2020-04-22", 0L, Difficulty.HARDCORE.toString()));
     }
 
     public void deleteData() {
@@ -76,17 +76,15 @@ public class TaskRepository {
         } else throw new BadRequestException("Task already exists");
     }
 
-    public Task update(Task newTask) {
+    public void update(Task newTask) {
         tasks = tasks.stream().map(task -> {
             if (newTask.getIdTask().equals(task.getIdTask())) return newTask;
             else return task;
         }).collect(Collectors.toCollection(TreeSet::new));
-        return newTask;
     }
 
-    public Task delete(Task task) {
+    public void delete(Task task) {
         if (!tasks.remove(task)) throw new BadRequestException("Task not found");
         userTaskRepository.deleteAll(userTaskRepository.findByIdTask(task.getIdTask()));
-        return task;
     }
 }

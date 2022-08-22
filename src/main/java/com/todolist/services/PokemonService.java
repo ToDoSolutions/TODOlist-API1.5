@@ -13,15 +13,51 @@ import java.util.stream.Collectors;
 
 public class PokemonService {
 
-    String startUrl =  "https://pokemonapiaiss.lm.r.appspot.com/api/pokemons/";
-
     private static PokemonService instance = null;
+    final String startUrl = "https://pokemonapiaiss.lm.r.appspot.com/api/pokemons/";
 
     public static PokemonService getInstance() {
         instance = (instance == null) ? new PokemonService() : instance;
         return instance;
     }
 
+    private static String getAnnotation(Pokemon pokemon) {
+        if (pokemon.getLegend()) {
+            return "Be careful, you will need a masterball!!!";
+        } else {
+            if (pokemon.getLegend()) {
+                return "easy peasy lemon squeezy, take one pokeball";
+            } else if (getAvgStats(pokemon) < 100) {
+                return "mmmh, you will nead some pokeballs";
+            } else if (getAvgStats(pokemon) < 150) {
+                return "uffff, you must take a great a amount of superballs";
+            } else if (getAvgStats(pokemon) < 200) {
+                return "Yisus, if you do not catch dozens of super balls, you will not be able to catch it.";
+            } else {
+                return "LMFAO, take the entire Pokemon Center in your bag";
+            }
+        }
+    }
+
+    private static String getDifficulty(Pokemon pokemon) {
+        if (Boolean.TRUE.equals(pokemon.getLegend())) {
+            return "I_WANT_TO_DIE";
+        } else {
+            if (getAvgStats(pokemon) < 100) {
+                return "EASY";
+            } else if (getAvgStats(pokemon) < 150) {
+                return "MEDIUM";
+            } else if (getAvgStats(pokemon) < 200) {
+                return "HARD";
+            } else {
+                return "HARDCORE";
+            }
+        }
+    }
+
+    private static Integer getAvgStats(Pokemon pokemon) {
+        return (pokemon.getHp() + pokemon.getAttack() + pokemon.getDefense()) / 3;
+    }
 
     public Pokemon[] findAllPokemon() {
         String url = startUrl;
@@ -65,7 +101,6 @@ public class PokemonService {
         return task;
     }
 
-
     public Task pokemonIntoTask(Pokemon pokemon, String status, String finishedDate, Long Priority, Integer days, String startDate) {
         Task task = new Task();
         StringBuilder types = new StringBuilder();
@@ -86,44 +121,5 @@ public class PokemonService {
         task.setPriority(Priority);
         task.setDifficulty(getDifficulty(pokemon));
         return task;
-    }
-
-
-    private static String getAnnotation(Pokemon pokemon) {
-        if (pokemon.getLegend()) {
-            return "Be careful, you will need a masterball!!!";
-        } else {
-            if (pokemon.getLegend()) {
-                return "easy peasy lemon squeezy, take one pokeball";
-            } else if (getAvgStats(pokemon) < 100) {
-                return "mmmh, you will nead some pokeballs";
-            } else if (getAvgStats(pokemon) < 150) {
-                return "uffff, you must take a great a amount of superballs";
-            } else if (getAvgStats(pokemon) < 200) {
-                return "Yisus, if you do not catch dozens of super balls, you will not be able to catch it.";
-            } else {
-                return "LMFAO, take the entire Pokemon Center in your bag";
-            }
-        }
-    }
-
-    private static String getDifficulty(Pokemon pokemon) {
-        if (pokemon.getLegend()) {
-            return "I_WANT_TO_DIE";
-        } else {
-            if (getAvgStats(pokemon) < 100) {
-                return "EASY";
-            } else if (getAvgStats(pokemon) < 150) {
-                return "MEDIUM";
-            } else if (getAvgStats(pokemon) < 200) {
-                return "HARD";
-            } else {
-                return "HARDCORE";
-            }
-        }
-    }
-
-    private static Integer getAvgStats(Pokemon pokemon) {
-        return (pokemon.getHp() + pokemon.getAttack() + pokemon.getDefense()) / 3;
     }
 }

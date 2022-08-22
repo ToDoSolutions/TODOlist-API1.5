@@ -70,10 +70,6 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public List<User> findUsersWithTask(Task task) {
-        return userRepository.findAll().stream().filter(user -> getTasksFromUser(user).contains(task)).collect(Collectors.toList());
-    }
-
     public List<Task> getTasksFromUser(User user) {
         return userTaskRepository.findByIdUser(user.getIdUser()).stream()
                 .map(userTask -> taskRepository.findByIdTask(userTask.getIdTask()))
@@ -83,20 +79,6 @@ public class UserService {
     public List<ShowTask> getShowTaskFromUser(User user) {
         return getTasksFromUser(user).stream().map(ShowTask::new).collect(Collectors.toList());
     }
-
-    /*
-    public List<Group> getGroupsFromUser(User user) {
-        return groupUserRepository.findByIdUser(user.getIdUser()).stream()
-                .map(groupUser -> groupRepository.findById(groupUser.getIdGroup()).orElseThrow(() -> new RuntimeException("Group not found.")))
-                .toList();
-    }
-     */
-
-    /*
-    public List<ShowGroup> getShowGroupsFromUser(User user) {
-        return getGroupsFromUser(user).stream().map(group -> new ShowGroup(group, groupService.getShowUserFromGroup(group))).collect(Collectors.toList());
-    }
-     */
 
     public void addTaskToUser(User user, Task task) {
         userTaskRepository.save(UserTask.of(user.getIdUser(), task.getIdTask()));
@@ -109,26 +91,7 @@ public class UserService {
         userTaskRepository.deleteAll(userTask);
     }
 
-    public void removeAllTasksFromUser(User user) {
-        List<UserTask> userTask = userTaskRepository.findByIdUser(user.getIdUser());
-        userTaskRepository.deleteAll(userTask);
-    }
-
     public boolean hasTask(User user, Task task) {
         return userTaskRepository.findByIdTaskAndIdUser(task.getIdTask(), user.getIdUser()).isEmpty();
     }
-
-    /*
-    public void removeAllTasksFromUser(User user, Task task) {
-        List<UserTask> userTask = userTaskRepository.findByIdTaskAndIdUser(task.getIdTask(), user.getIdUser());
-        userTaskRepository.deleteAll(userTask);
-    }
-     */
-
-    /*
-    public void removeUserFromAllGroups(User user) {
-        List<GroupUser> groupUser = groupUserRepository.findByIdUser(user.getIdUser());
-        groupUserRepository.deleteAll(groupUser);
-    }
-    */
 }

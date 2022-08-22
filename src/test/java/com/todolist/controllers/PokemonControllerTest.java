@@ -10,13 +10,13 @@ import com.todolist.exceptions.HandleConstraintViolationException;
 import com.todolist.exceptions.HandleNotFoundException;
 import com.todolist.exceptions.HandleServerException;
 import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.Application;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class PokemonControllerTest extends JerseyTest {
@@ -36,8 +36,12 @@ public class PokemonControllerTest extends JerseyTest {
     // GetAll
     @Test
     public void testGetAllFine() {
+<<<<<<<HEAD
         final ShowTask[] responseMsg = target().path("pokemon")
                 .request().get(ShowTask[].class);
+=======
+        final ShowTask[] responseMsg = target().path("pokemon").request().get(ShowTask[].class);
+>>>>>>>f084247764a602892254a043ff300d1c698f57ab
         assertTrue("No se han encontrado datos.", responseMsg != null && responseMsg.length > 0);
     }
 
@@ -46,7 +50,7 @@ public class PokemonControllerTest extends JerseyTest {
     public void testGetSoloFine() {
         final ShowTask responseMsg = target().path("pokemon/Wingull")
                 .queryParam("days", 4).request().get(ShowTask.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
     }
 
     @Test
@@ -62,7 +66,7 @@ public class PokemonControllerTest extends JerseyTest {
     public void testGetSoloLowerCase() {
         final ShowTask responseMsg = target().path("pokemon/wingull")
                 .queryParam("days", 4).request().get(ShowTask.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
     }
 
     // Add
@@ -70,6 +74,6 @@ public class PokemonControllerTest extends JerseyTest {
     public void testAddFine() {
         final ShowTask responseMsg = target().path("pokemon/wingull")
                 .queryParam("days", 4).request().post(Entity.json(null), ShowTask.class);
-        assertTrue("No se ha encontrado el dato.", responseMsg != null);
+        assertNotNull("No se ha encontrado el dato.", responseMsg);
     }
 }

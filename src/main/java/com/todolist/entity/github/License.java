@@ -18,7 +18,7 @@ import java.util.Map;
 public class License {
 
     @JsonIgnore
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<>();
     @JsonProperty("key")
     private String key;
     @JsonProperty("name")

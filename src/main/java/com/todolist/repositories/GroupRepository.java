@@ -66,17 +66,15 @@ public class GroupRepository {
         else throw new BadRequestException("Group already exists");
     }
 
-    public Group update(Group newGroup) {
+    public void update(Group newGroup) {
         groups = groups.stream().map(group -> {
             if (newGroup.getIdGroup().equals(group.getIdGroup())) return newGroup;
             else return group;
         }).collect(Collectors.toCollection(TreeSet::new));
-        return newGroup;
     }
 
-    public Group delete(Group group) {
+    public void delete(Group group) {
         if (!groups.remove(group)) throw new BadRequestException("Group not found");
         groupUserRepository.deleteAll(groupUserRepository.findByIdGroup(group.getIdGroup()));
-        return group;
     }
 }

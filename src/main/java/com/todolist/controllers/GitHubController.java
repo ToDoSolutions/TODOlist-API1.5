@@ -22,6 +22,7 @@ public class GitHubController {
     final TaskService taskService;
     final UserService userService;
 
+
     public GitHubController() {
         gitHubService = GitHubService.getInstance();
         taskService = TaskService.getInstance();

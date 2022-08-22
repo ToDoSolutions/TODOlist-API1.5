@@ -79,13 +79,6 @@ public class GroupService {
         groupUserRepository.deleteAll(groupUser);
     }
 
-    public void removeAllUsersFromGroup(Group group) {
-        List<GroupUser> groupUser = groupUserRepository.findByIdGroup(group.getIdGroup());
-        if (groupUser == null)
-            throw new NullPointerException("The group with idGroup " + group.getIdGroup() + " does not have any user.|method: removeAllUsersFromGroup");
-        groupUserRepository.deleteAll(groupUser);
-    }
-
     public void addTaskToGroup(Group group, Task task) {
         for (User user : getUsersFromGroup(group)) {
             List<UserTask> userTask = userTaskRepository.findByIdTaskAndIdUser(task.getIdTask(), user.getIdUser());
@@ -102,14 +95,6 @@ public class GroupService {
         }
     }
 
-    public List<Group> findGroupsWithUser(User user) {
-        return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).contains(user)).collect(Collectors.toList());
-    }
-
-    public List<Group> findGroupsWithTask(Task task) {
-        return groupRepository.findAll().stream().filter(group -> getUsersFromGroup(group).stream().anyMatch(user -> userService.getTasksFromUser(user).contains(task))).collect(Collectors.toList());
-    }
-
     public boolean hasUser(Group group, User user) {
         return getUsersFromGroup(group).contains(user);
     }
@@ -117,22 +102,4 @@ public class GroupService {
     public boolean hasTask(Group group, Task task) {
         return getUsersFromGroup(group).stream().anyMatch(user -> userService.getTasksFromUser(user).contains(task));
     }
-
-
-
-    /*
-    public void removeAllTasksFromGroup(Group group) {
-        List<User> users = getUsersFromGroup(group);
-        for (User user : users) {
-            userService.removeAllTasksFromUser(user);
-        }
-    }
-
-    public void addTasktoAllUser(Group group, Task task) {
-        List<User> users = getUsersFromGroup(group);
-        for (User user : users) {
-            userService.addTaskToUser(user, task);
-        }
-    }
-     */
 }

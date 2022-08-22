@@ -12,7 +12,6 @@ public class HandleConstraintViolationException implements ExceptionMapper<Const
 
     @Override
     public Response toResponse(ConstraintViolationException exception) {
-        System.out.println("HandleConstraintViolationException");
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity(new ExceptionResponse(
                         LocalDate.now().toString(),

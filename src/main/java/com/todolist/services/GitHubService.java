@@ -1,6 +1,5 @@
 package com.todolist.services;
 
-import com.todolist.dtos.ShowTask;
 import com.todolist.entity.Task;
 import com.todolist.entity.User;
 import com.todolist.entity.github.Owner;
@@ -17,16 +16,21 @@ import java.util.stream.Collectors;
 
 public class GitHubService {
 
-    String startUrl = "https://api.github.com";
     private static GitHubService instance = null;
+    final String startUrl = "https://api.github.com";
 
     public static GitHubService getInstance() {
         instance = (instance == null) ? new GitHubService() : instance;
         return instance;
     }
 
+    private static String getAdditional(Map<String, Object> additional, String key) {
+        Object aux = additional.get(key);
+        return aux == null ? null : aux.toString();
+    }
+
     public Owner findOwnerByUsername(String username) {
-        String url = startUrl+ "/users/" + username;
+        String url = startUrl + "/users/" + username;
         try {
             return ClientBuilder.newClient().target(url).request().get(Owner.class);
         } catch (Exception e) {
@@ -39,7 +43,7 @@ public class GitHubService {
     }
 
     public Repo findRepoByName(String username, String repo) {
-        String url = startUrl+ "/repos/" + username + "/" + repo;
+        String url = startUrl + "/repos/" + username + "/" + repo;
         try {
             return ClientBuilder.newClient().target(url).request().get(Repo.class);
         } catch (Exception e) {
@@ -92,10 +96,5 @@ public class GitHubService {
         String bio = getAdditional(additional, "bio");
         String location = getAdditional(additional, "location");
         return User.of(name, surname, email, owner.getAvatarUrl(), bio, location);
-    }
-
-    private static String getAdditional(Map<String, Object> additional, String key) {
-        Object aux = additional.get(key);
-        return aux == null ? null : aux.toString();
     }
 }

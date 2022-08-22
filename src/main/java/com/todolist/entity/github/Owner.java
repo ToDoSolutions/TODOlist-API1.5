@@ -31,7 +31,7 @@ import java.util.Map;
 public class Owner {
 
     @JsonIgnore
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<>();
     @JsonProperty("login")
     private String login;
     @JsonProperty("id")

@@ -17,7 +17,7 @@ public class Main {
             webPort = "8080";
         }
 
-        final Server server = new Server(Integer.valueOf(webPort));
+        final Server server = new Server(Integer.parseInt(webPort));
         final WebAppContext root = new WebAppContext();
 
         root.setContextPath("/");

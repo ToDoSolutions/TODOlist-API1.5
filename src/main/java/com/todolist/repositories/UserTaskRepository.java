@@ -51,14 +51,16 @@ public class UserTaskRepository {
         return userTasks.stream().filter(x -> x.getIdTask().equals(idTask) && x.getIdUser().equals(idUser)).collect(Collectors.toList());
     }
 
-    public UserTask save(UserTask userTask) {
+    public void save(UserTask userTask) {
         userTask.setIdUserTask(generatedId++);
-        if (userTasks.add(userTask)) return userTask;
+        if (userTasks.add(userTask)) {
+        }
         else throw new BadRequestException("UserTask already exists");
     }
 
-    public List<UserTask> deleteAll(List<UserTask> userTask) {
-        if (userTasks.removeAll(userTask)) return userTask;
+    public void deleteAll(List<UserTask> userTask) {
+        if (userTasks.removeAll(userTask)) {
+        }
         else throw new BadRequestException("UserTask not found");
     }
 }

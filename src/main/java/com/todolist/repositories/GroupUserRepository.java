@@ -53,14 +53,16 @@ public class GroupUserRepository {
         return groupUsers.stream().filter(x -> x.getIdGroup().equals(idGroup) && x.getIdUser().equals(idUser)).collect(Collectors.toList());
     }
 
-    public GroupUser save(GroupUser groupUser) {
+    public void save(GroupUser groupUser) {
         groupUser.setIdGroupUser(generatedId++);
-        if (groupUsers.add(groupUser)) return groupUser;
+        if (groupUsers.add(groupUser)) {
+        }
         else throw new BadRequestException("GroupUser already exists");
     }
 
-    public List<GroupUser> deleteAll(List<GroupUser> groupUsers) {
-        if (groupUsers.removeAll(groupUsers)) return groupUsers;
+    public void deleteAll(List<GroupUser> groupUsers) {
+        if (groupUsers.removeAll(groupUsers)) {
+        }
         else throw new BadRequestException("GroupUser not found");
     }
 }

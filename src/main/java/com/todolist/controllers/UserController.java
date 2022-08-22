@@ -106,7 +106,7 @@ public class UserController {
         if (user == null)
             throw new NotFoundException("The user with id " + userId + " does not exist.", Response.created(uriInfo.getRequestUri()).status(404).build());
         // Devolvemos el usuario.
-        return Response.ok(new ShowUser(user, userService.getShowTaskFromUser(user)).getFields((fieldsUser == null ? ShowUser.ALL_ATTRIBUTES : fieldsUser), fieldsTask)).build();
+        return Response.ok(new ShowUser(user, userService.getShowTaskFromUser(user)).getFields(fieldsUser, fieldsTask)).build();
     }
 
     @POST

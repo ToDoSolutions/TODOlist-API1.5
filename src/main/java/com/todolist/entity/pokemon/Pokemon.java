@@ -20,6 +20,8 @@ import java.util.Map;
 @Generated("jsonschema2pojo")
 public class Pokemon {
 
+    @JsonIgnore
+    private final Map<String, Object> additionalProperties = new HashMap<>();
     @JsonProperty("name")
     private String name;
     @JsonProperty("type1")
@@ -36,8 +38,6 @@ public class Pokemon {
     private Integer generation;
     @JsonProperty("legend")
     private Boolean legend;
-    @JsonIgnore
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("name")
     public String getName() {

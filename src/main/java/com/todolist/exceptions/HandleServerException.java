@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public class HandleServerException implements ExceptionMapper<ServerException> {
     @Override
     public Response toResponse(ServerException exception) {
-        System.out.println("HandleServerException");
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                 .entity(new ExceptionResponse(
                         LocalDate.now().toString(),

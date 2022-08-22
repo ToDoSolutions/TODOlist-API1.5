@@ -5,7 +5,6 @@ import com.todolist.entity.Task;
 import com.todolist.repositories.Sort;
 import com.todolist.repositories.TaskRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +25,6 @@ public class TaskService {
 
     public List<ShowTask> findAllShowTasks(String order) {
         return taskRepository.findAll(order.replace("+", "").replace("-", ""), Sort.parse(order)).stream().map(ShowTask::new).collect(Collectors.toList());
-    }
-
-    public List<Task> findAllTasks() {
-        return new ArrayList<>(taskRepository.findAll());
     }
 
     public Task findTaskById(Long idTask) {
